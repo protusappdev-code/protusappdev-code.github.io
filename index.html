@@ -177,11 +177,24 @@
       border-radius: 50%;
       box-shadow: 0 0 0 52px rgba(255,255,255,.018), 0 0 0 104px rgba(255,255,255,.012);
     }
-    .hero-logo {
+    .hero-logo-wrap {
       width: min(750px, 118%);
       max-width: none;
       margin-inline: -9%;
+      position: relative;
+      object-fit: contain;
       filter: drop-shadow(0 28px 42px rgba(0, 0, 0, .25));
+    }
+    .hero-logo {
+      width: 100%;
+      height: auto;
+    }
+    .hero-logo-text {
+      position: absolute;
+      inset: 0;
+      filter: grayscale(1) brightness(0) invert(1);
+      clip-path: inset(0 0 0 34%);
+      pointer-events: none;
     }
 
     section { padding: 92px 0; }
@@ -250,7 +263,7 @@
       .hero-copy > p { margin-inline: auto; }
       .actions { justify-content: center; }
       .logo-stage { min-height: 300px; order: -1; }
-      .hero-logo { width: min(720px, 112%); margin-inline: -6%; }
+      .hero-logo-wrap { width: min(720px, 112%); margin-inline: -6%; }
       .about-panel { grid-template-columns: 1fr; gap: 30px; }
       .cards { grid-template-columns: 1fr 1fr; }
       .card:last-child { grid-column: 1 / -1; }
@@ -266,7 +279,7 @@
       .hero { padding: 28px 0 65px; }
       .logo-stage { min-height: 215px; }
       .logo-stage::after { width: 205px; }
-      .hero-logo { width: 116%; margin-inline: -8%; }
+      .hero-logo-wrap { width: 116%; margin-inline: -8%; }
       h1 { font-size: clamp(2.72rem, 14vw, 4.1rem); }
       section { padding: 68px 0; }
       .cards { grid-template-columns: 1fr; }
@@ -316,7 +329,10 @@
           </div>
         </div>
         <div class="logo-stage" aria-label="Protus App Development logo">
-          <img class="hero-logo" src="protus-logo-dark.png" width="1678" height="937" alt="Protus App Development">
+          <div class="hero-logo-wrap">
+            <img class="hero-logo" src="protus-logo.png" alt="Protus App Development">
+            <img class="hero-logo hero-logo-text" src="protus-logo.png" alt="" aria-hidden="true">
+          </div>
         </div>
       </div>
     </section>
@@ -369,9 +385,9 @@
           <div>
             <div class="section-kicker">Support &amp; Contact</div>
             <h2>Need help with a Protus app?</h2>
-            <p>For product support, feedback, or general enquiries, use the contact details provided on the relevant Google Play app listing. You can also follow the developer profile on GitHub.</p>
+            <p>For product support, feedback, bug reports, or general enquiries, contact Protus App Development by email.</p>
           </div>
-          <a class="button button-primary" href="https://github.com/protusappdev-code" rel="noopener noreferrer">Visit GitHub profile</a>
+          <a class="button button-primary" href="mailto:protusappdev@gmail.com">Email Support</a>
         </div>
       </div>
     </section>
