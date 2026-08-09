@@ -1,31 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Developer Name</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020b20">
+  <meta name="description" content="Protus App Development creates polished Android apps and mobile games.">
+  <title>Protus App Development | Android Apps &amp; Games</title>
+  <link rel="icon" type="image/png" href="protus-logo.png">
+  <style>
+    :root {
+      --ink: #f6f8fc;
+      --muted: #a9b5c9;
+      --page: #020b20;
+      --page-2: #07152d;
+      --card: rgba(15, 34, 61, .68);
+      --line: rgba(255, 255, 255, .1);
+      --blue: #3d8dd6;
+      --blue-bright: #65b8ff;
+      --orange: #ff941f;
+      --shadow: 0 30px 80px rgba(0, 0, 0, .35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% 8%, rgba(25, 110, 189, .2), transparent 29rem),
+        radial-gradient(circle at 92% 29%, rgba(255, 148, 31, .08), transparent 23rem),
+        linear-gradient(180deg, var(--page), var(--page-2) 55%, var(--page));
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-width: 320px;
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -60px;
+      z-index: 100;
+      padding: 10px 14px;
+      color: #061123;
+      background: #fff;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+    .skip-link:focus { top: 12px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(2, 11, 32, .78);
+      backdrop-filter: blur(18px);
+    }
+    nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: .98rem;
+      font-weight: 850;
+      letter-spacing: -.01em;
+    }
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 10px;
+      background: linear-gradient(145deg, var(--orange), #db5e12 47%, #1765a9 49%, #073f7c);
+      box-shadow: 0 8px 26px rgba(19, 103, 174, .25);
+    }
+    .brand-mark::after {
+      content: "P";
+      font-size: .9rem;
+      font-weight: 900;
+      color: #fff;
+    }
+    .nav-links { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .nav-links a {
+      padding: 9px 12px;
+      color: #c0cada;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 700;
+      transition: color .2s ease, background .2s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: #fff; background: rgba(255, 255, 255, .07); }
+
+    .hero { padding: 72px 0 90px; overflow: hidden; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .93fr) minmax(480px, 1.07fr);
+      align-items: center;
+      gap: 38px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      color: #badcff;
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--orange); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 23px;
+      font-size: clamp(3.15rem, 6.6vw, 6.2rem);
+      line-height: .96;
+      letter-spacing: -.058em;
+      max-width: 760px;
+    }
+    .hero-copy > p { max-width: 620px; margin-bottom: 30px; color: var(--muted); font-size: clamp(1.03rem, 1.7vw, 1.18rem); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 11px 18px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 800;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #061123; border-color: transparent; background: linear-gradient(135deg, #fff, #dbeaff); box-shadow: 0 12px 30px rgba(79, 154, 230, .2); }
+    .button-secondary { background: rgba(255, 255, 255, .045); }
+    .button-secondary:hover { border-color: rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .08); }
+
+    .logo-stage {
+      position: relative;
+      min-height: 410px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+    .logo-stage::before {
+      content: "";
+      position: absolute;
+      inset: 8% 0;
+      z-index: -1;
+      border-radius: 46% 54% 53% 47% / 42% 40% 60% 58%;
+      background: radial-gradient(circle at 50% 48%, rgba(20, 91, 161, .34), rgba(5, 20, 49, .3) 60%, transparent 75%);
+      filter: blur(2px);
+    }
+    .logo-stage::after {
+      content: "";
+      position: absolute;
+      width: 330px;
+      aspect-ratio: 1;
+      z-index: -2;
+      border: 1px solid rgba(96, 182, 255, .16);
+      border-radius: 50%;
+      box-shadow: 0 0 0 52px rgba(255,255,255,.018), 0 0 0 104px rgba(255,255,255,.012);
+    }
+    .hero-logo {
+      width: min(750px, 118%);
+      max-width: none;
+      margin-inline: -9%;
+      filter: drop-shadow(0 28px 42px rgba(0, 0, 0, .25));
+    }
+
+    section { padding: 92px 0; }
+    .section-kicker { margin-bottom: 10px; color: var(--orange); font-size: .77rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin-bottom: 17px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.04; letter-spacing: -.045em; }
+    .section-lead { max-width: 670px; margin-bottom: 38px; color: var(--muted); font-size: 1.05rem; }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 52px;
+      padding: clamp(28px, 5vw, 58px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(17, 43, 76, .7), rgba(7, 24, 51, .52));
+      box-shadow: var(--shadow);
+    }
+    .about-panel p { margin-bottom: 0; color: var(--muted); }
+    .principles { display: grid; gap: 14px; align-content: center; }
+    .principle { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border: 1px solid rgba(255,255,255,.08); border-radius: 15px; background: rgba(255,255,255,.03); }
+    .principle span { flex: 0 0 auto; display: grid; place-items: center; width: 30px; height: 30px; color: #061123; border-radius: 9px; background: linear-gradient(145deg, #83c6ff, #ffac4d); font-size: .8rem; font-weight: 900; }
+    .principle strong { display: block; margin-bottom: 2px; }
+    .principle small { color: var(--muted); font-size: .86rem; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      min-height: 250px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: var(--card);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, .18);
+      transition: transform .22s ease, border-color .22s ease;
+    }
+    .card:hover { transform: translateY(-5px); border-color: rgba(102, 185, 255, .32); }
+    .icon { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 46px; border-radius: 14px; color: #fff; background: linear-gradient(145deg, rgba(60, 144, 218, .85), rgba(11, 73, 128, .75)); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 1.2rem; font-weight: 900; }
+    .card:nth-child(2) .icon { background: linear-gradient(145deg, rgba(255, 157, 51, .95), rgba(190, 79, 11, .78)); }
+    .card h3 { margin-bottom: 8px; font-size: 1.22rem; }
+    .card p { margin-bottom: 0; color: var(--muted); font-size: .94rem; }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 30px;
+      padding: clamp(30px, 6vw, 64px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255, 148, 31, .2), transparent 17rem),
+        linear-gradient(125deg, rgba(14, 71, 123, .78), rgba(8, 27, 57, .88));
+      box-shadow: var(--shadow);
+    }
+    .contact h2 { max-width: 720px; }
+    .contact p { max-width: 700px; margin-bottom: 0; color: #becade; }
+
+    footer { padding: 32px 0 40px; border-top: 1px solid var(--line); color: #8592a6; font-size: .88rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; }
+    .footer-row a { color: #b9c5d7; text-decoration: none; }
+
+    @media (max-width: 920px) {
+      .hero { padding-top: 48px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-copy { text-align: center; }
+      .hero-copy > p { margin-inline: auto; }
+      .actions { justify-content: center; }
+      .logo-stage { min-height: 300px; order: -1; }
+      .hero-logo { width: min(720px, 112%); margin-inline: -6%; }
+      .about-panel { grid-template-columns: 1fr; gap: 30px; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .card:last-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1120px); }
+      nav { min-height: 68px; }
+      .brand { font-size: .88rem; }
+      .nav-links { gap: 0; }
+      .nav-links li:first-child { display: none; }
+      .nav-links a { padding: 8px; font-size: .82rem; }
+      .hero { padding: 28px 0 65px; }
+      .logo-stage { min-height: 215px; }
+      .logo-stage::after { width: 205px; }
+      .hero-logo { width: 116%; margin-inline: -8%; }
+      h1 { font-size: clamp(2.72rem, 14vw, 4.1rem); }
+      section { padding: 68px 0; }
+      .cards { grid-template-columns: 1fr; }
+      .card:last-child { grid-column: auto; }
+      .card { min-height: 215px; }
+      .icon { margin-bottom: 32px; }
+      .contact { grid-template-columns: 1fr; }
+      .contact .button { width: 100%; }
+      .footer-row { flex-direction: column; gap: 7px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Protus</h1>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <p>Independent Android game and app developer.</p>
+  <header>
+    <div class="container">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Protus App Development home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Protus App Development</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#apps">Apps &amp; Games</a></li>
+          <li><a href="#contact">Support</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <h2>Games & Apps</h2>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Independent Android Developer</div>
+          <h1>Thoughtful apps. Enjoyable games.</h1>
+          <p>Protus App Development creates focused mobile experiences for Android—built around clear ideas, dependable performance, and satisfying interaction.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#apps">Explore our work</a>
+            <a class="button button-secondary" href="#contact">Get support</a>
+          </div>
+        </div>
+        <div class="logo-stage" aria-label="Protus App Development logo">
+          <img class="hero-logo" src="protus-logo-dark.png" width="1678" height="937" alt="Protus App Development">
+        </div>
+      </div>
+    </section>
 
-    <p>
-        My games and applications are available on Google Play.
-    </p>
+    <section id="about">
+      <div class="container">
+        <div class="about-panel">
+          <div>
+            <div class="section-kicker">About</div>
+            <h2>Independent development, carefully considered.</h2>
+            <p>We build practical Android applications and engaging mobile games with a clear goal: make every experience straightforward to understand and rewarding to use. From first concept to ongoing updates, quality and usability guide the work.</p>
+          </div>
+          <div class="principles" aria-label="Development principles">
+            <div class="principle"><span>01</span><div><strong>Purposeful design</strong><small>Useful features and focused gameplay without unnecessary complexity.</small></div></div>
+            <div class="principle"><span>02</span><div><strong>Reliable experiences</strong><small>Responsive interfaces shaped by testing and careful refinement.</small></div></div>
+            <div class="principle"><span>03</span><div><strong>Built to improve</strong><small>Feedback and updates help every release grow stronger over time.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <h2>Support</h2>
+    <section id="apps">
+      <div class="container">
+        <div class="section-kicker">Apps &amp; Games</div>
+        <h2>Mobile ideas, brought to life.</h2>
+        <p class="section-lead">Protus projects are made for Android and distributed through Google Play. Current and upcoming releases will be featured here as they become available.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" aria-hidden="true">A</div>
+            <h3>Android Apps</h3>
+            <p>Practical mobile tools with approachable interfaces, useful features, and reliable everyday performance.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">G</div>
+            <h3>Mobile Games</h3>
+            <p>Gameplay-led experiences designed around satisfying mechanics, clarity, and replay value.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">+</div>
+            <h3>New Releases</h3>
+            <p>More projects are in development. Check back for announcements, availability, and future updates.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <p>
-        For support, contact: protusappdev@gmail.com
-    </p>
+    <section id="contact">
+      <div class="container">
+        <div class="contact">
+          <div>
+            <div class="section-kicker">Support &amp; Contact</div>
+            <h2>Need help with a Protus app?</h2>
+            <p>For product support, feedback, or general enquiries, use the contact details provided on the relevant Google Play app listing. You can also follow the developer profile on GitHub.</p>
+          </div>
+          <a class="button button-primary" href="https://github.com/protusappdev-code" rel="noopener noreferrer">Visit GitHub profile</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <h2>Privacy</h2>
-
-    <p>
-    
+  <footer>
+    <div class="container footer-row">
+      <span>&copy; 2026 Protus App Development. All rights reserved.</span>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
+  </footer>
 </body>
 </html>
