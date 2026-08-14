@@ -77,20 +77,11 @@
       letter-spacing: -.01em;
     }
     .brand-mark {
-      width: 31px;
-      height: 31px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, .15);
-      border-radius: 10px;
-      background: linear-gradient(145deg, var(--orange), #db5e12 47%, #1765a9 49%, #073f7c);
-      box-shadow: 0 8px 26px rgba(19, 103, 174, .25);
-    }
-    .brand-mark::after {
-      content: "P";
-      font-size: .9rem;
-      font-weight: 900;
-      color: #fff;
+      width: 36px;
+      height: 36px;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 7px 14px rgba(19, 103, 174, .28));
     }
     .nav-links { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
     .nav-links a {
@@ -230,10 +221,113 @@
       transition: transform .22s ease, border-color .22s ease;
     }
     .card:hover { transform: translateY(-5px); border-color: rgba(102, 185, 255, .32); }
+    .category-button {
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .category-button:focus-visible {
+      outline: 3px solid rgba(101, 184, 255, .72);
+      outline-offset: 3px;
+    }
+    .category-button[aria-expanded="true"] {
+      border-color: rgba(101, 184, 255, .45);
+      background: linear-gradient(145deg, rgba(22, 62, 103, .82), rgba(9, 29, 59, .74));
+      transform: translateY(-3px);
+    }
+    .category-action {
+      display: inline-block;
+      margin-top: 18px;
+      color: #d7eaff;
+      font-size: .82rem;
+      font-weight: 850;
+    }
     .icon { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 46px; border-radius: 14px; color: #fff; background: linear-gradient(145deg, rgba(60, 144, 218, .85), rgba(11, 73, 128, .75)); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 1.2rem; font-weight: 900; }
     .card:nth-child(2) .icon { background: linear-gradient(145deg, rgba(255, 157, 51, .95), rgba(190, 79, 11, .78)); }
+    .card-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      min-height: 0;
+      padding: 0;
+      overflow: hidden;
+      border-color: rgba(255, 158, 51, .28);
+      background:
+        radial-gradient(circle at 95% 5%, rgba(255, 148, 31, .14), transparent 11rem),
+        var(--card);
+    }
+    .app-feature {
+      width: 100%;
+      height: 100%;
+      min-height: 330px;
+      object-fit: cover;
+    }
+    .app-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: clamp(25px, 4vw, 42px);
+    }
+    .app-heading {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 19px;
+    }
+    .app-icon {
+      flex: 0 0 auto;
+      width: 68px;
+      height: 68px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 17px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    }
+    .app-heading h3 {
+      margin-bottom: 0;
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+    }
+    .app-type {
+      display: inline-block;
+      margin-bottom: 5px;
+      padding: 3px 8px;
+      color: #9bcfff;
+      border: 1px solid rgba(101, 184, 255, .2);
+      border-radius: 999px;
+      background: rgba(61, 141, 214, .1);
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .card-featured p { margin-bottom: 25px; }
+    .store-link { width: 100%; }
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 9px 15px;
+      color: #dff7a5;
+      border: 1px solid rgba(184, 230, 65, .28);
+      border-radius: 12px;
+      background: rgba(151, 204, 31, .1);
+      font-size: .84rem;
+      font-weight: 850;
+    }
     .card h3 { margin-bottom: 8px; font-size: 1.22rem; }
     .card p { margin-bottom: 0; color: var(--muted); font-size: .94rem; }
+    .app-panel { margin-top: 20px; }
+    .app-panel[hidden] { display: none; }
+    .empty-panel {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      color: var(--muted);
+      background: rgba(255,255,255,.035);
+    }
+    .empty-panel p { margin-bottom: 0; }
 
     .contact {
       display: grid;
@@ -266,7 +360,7 @@
       .hero-logo-wrap { width: min(720px, 112%); margin-inline: -6%; }
       .about-panel { grid-template-columns: 1fr; gap: 30px; }
       .cards { grid-template-columns: 1fr 1fr; }
-      .card:last-child { grid-column: 1 / -1; }
+      .card-featured { grid-template-columns: 1.2fr .8fr; }
     }
 
     @media (max-width: 640px) {
@@ -283,7 +377,8 @@
       h1 { font-size: clamp(2.72rem, 14vw, 4.1rem); }
       section { padding: 68px 0; }
       .cards { grid-template-columns: 1fr; }
-      .card:last-child { grid-column: auto; }
+      .card-featured { grid-template-columns: 1fr; }
+      .app-feature { min-height: 0; aspect-ratio: 1024 / 500; }
       .card { min-height: 215px; }
       .icon { margin-bottom: 32px; }
       .contact { grid-template-columns: 1fr; }
@@ -304,7 +399,7 @@
     <div class="container">
       <nav aria-label="Main navigation">
         <a class="brand" href="#top" aria-label="Protus App Development home">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img class="brand-mark" src="protus-emblem.png" width="1254" height="1254" alt="" aria-hidden="true">
           <span>Protus App Development</span>
         </a>
         <ul class="nav-links">
@@ -359,21 +454,62 @@
         <div class="section-kicker">Apps &amp; Games</div>
         <h2>Mobile ideas, brought to life.</h2>
         <p class="section-lead">Protus projects are made for Android and distributed through Google Play. Current and upcoming releases will be featured here as they become available.</p>
-        <div class="cards">
-          <article class="card">
+        <div class="cards" aria-label="App categories">
+          <button class="card category-button" type="button" aria-expanded="false" aria-controls="android-apps-panel" data-panel="android-apps-panel">
             <div class="icon" aria-hidden="true">A</div>
             <h3>Android Apps</h3>
-            <p>Practical mobile tools with approachable interfaces, useful features, and reliable everyday performance.</p>
-          </article>
-          <article class="card">
+            <p>Browse practical Android apps published by Protus App Development.</p>
+            <span class="category-action">View Android apps&nbsp; →</span>
+          </button>
+          <button class="card category-button" type="button" aria-expanded="false" aria-controls="mobile-games-panel" data-panel="mobile-games-panel">
             <div class="icon" aria-hidden="true">G</div>
             <h3>Mobile Games</h3>
             <p>Gameplay-led experiences designed around satisfying mechanics, clarity, and replay value.</p>
-          </article>
-          <article class="card">
+            <span class="category-action">View mobile games&nbsp; →</span>
+          </button>
+          <button class="card category-button" type="button" aria-expanded="false" aria-controls="upcoming-panel" data-panel="upcoming-panel">
             <div class="icon" aria-hidden="true">+</div>
-            <h3>New Releases</h3>
-            <p>More projects are in development. Check back for announcements, availability, and future updates.</p>
+            <h3>Upcoming</h3>
+            <p>Preview apps and games currently in development at Protus.</p>
+            <span class="category-action">View upcoming projects&nbsp; →</span>
+          </button>
+        </div>
+
+        <div class="app-panel" id="android-apps-panel" hidden>
+          <article class="card card-featured">
+            <img class="app-feature" src="trial-surfer-feature.png" width="1024" height="500" loading="lazy" alt="Trial Surfer — Surf free trials. Bail before the charge.">
+            <div class="app-details">
+              <div class="app-heading">
+                <img class="app-icon" src="trial-surfer-icon.png" width="512" height="512" loading="lazy" alt="">
+                <div>
+                  <span class="app-type">Android Apps</span>
+                  <h3>Trial Surfer</h3>
+                </div>
+              </div>
+              <p>Keep track of free trials and stay ahead of upcoming charges. Surf free trials—and bail before the charge.</p>
+              <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.trialsurfer.app&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Trial Surfer on Google Play">View on Google Play&nbsp; ↗</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="app-panel" id="mobile-games-panel" hidden>
+          <div class="empty-panel"><p>Protus mobile games will appear here as they become available.</p></div>
+        </div>
+
+        <div class="app-panel" id="upcoming-panel" hidden>
+          <article class="card card-featured">
+            <img class="app-feature" src="gym-buddies-feature.jpg" width="1024" height="500" loading="lazy" alt="Gym Buddies — Bulk up. Stay passable. Get gains.">
+            <div class="app-details">
+              <div class="app-heading">
+                <img class="app-icon" src="gym-buddies-icon.png" width="512" height="512" loading="lazy" alt="">
+                <div>
+                  <span class="app-type">Upcoming</span>
+                  <h3>Gym Buddies</h3>
+                </div>
+              </div>
+              <p>An upcoming Protus mobile game. Bulk up, stay passable, and get gains.</p>
+              <span class="coming-soon">Coming soon to Android</span>
+            </div>
           </article>
         </div>
       </div>
@@ -399,5 +535,24 @@
       <a href="#top">Back to top &uarr;</a>
     </div>
   </footer>
+  <script>
+    const categoryButtons = document.querySelectorAll('.category-button');
+    const appPanels = document.querySelectorAll('.app-panel');
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const panel = document.getElementById(button.dataset.panel);
+        const wasOpen = button.getAttribute('aria-expanded') === 'true';
+
+        categoryButtons.forEach((item) => item.setAttribute('aria-expanded', 'false'));
+        appPanels.forEach((item) => { item.hidden = true; });
+
+        if (!wasOpen) {
+          button.setAttribute('aria-expanded', 'true');
+          panel.hidden = false;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
