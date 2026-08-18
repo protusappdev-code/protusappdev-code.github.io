@@ -244,8 +244,37 @@
       font-size: .82rem;
       font-weight: 850;
     }
-    .icon { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 46px; border-radius: 14px; color: #fff; background: linear-gradient(145deg, rgba(60, 144, 218, .85), rgba(11, 73, 128, .75)); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 1.2rem; font-weight: 900; }
-    .card:nth-child(2) .icon { background: linear-gradient(145deg, rgba(255, 157, 51, .95), rgba(190, 79, 11, .78)); }
+    .icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 38px;
+      border-radius: 16px;
+      color: #fff;
+      background: linear-gradient(145deg, rgba(61, 141, 214, .95), rgba(16, 75, 133, .85));
+      border: 1px solid rgba(101, 184, 255, .3);
+      box-shadow: 0 10px 25px rgba(25, 110, 189, .3), inset 0 1px 0 rgba(255, 255, 255, .35);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.2;
+    }
+    .card:nth-child(2) .icon {
+      background: linear-gradient(145deg, rgba(255, 148, 31, .95), rgba(190, 79, 11, .85));
+      border-color: rgba(255, 184, 102, .35);
+      box-shadow: 0 10px 25px rgba(255, 148, 31, .3), inset 0 1px 0 rgba(255, 255, 255, .35);
+    }
+    .card:nth-child(3) .icon {
+      background: linear-gradient(145deg, rgba(56, 189, 248, .9), rgba(99, 102, 241, .85));
+      border-color: rgba(147, 197, 253, .35);
+      box-shadow: 0 10px 25px rgba(56, 189, 248, .3), inset 0 1px 0 rgba(255, 255, 255, .35);
+    }
+    .category-button:hover .icon {
+      transform: scale(1.08);
+    }
     .card-featured {
       grid-column: 1 / -1;
       display: grid;
@@ -318,7 +347,7 @@
     }
     .card h3 { margin-bottom: 8px; font-size: 1.22rem; }
     .card p { margin-bottom: 0; color: var(--muted); font-size: .94rem; }
-    .app-panel { margin-top: 20px; }
+    .app-panel { margin-top: 20px; display: grid; gap: 20px; }
     .app-panel[hidden] { display: none; }
     .empty-panel {
       padding: 28px;
@@ -456,19 +485,39 @@
         <p class="section-lead">Protus projects are made for Android and distributed through Google Play. Current and upcoming releases will be featured here as they become available.</p>
         <div class="cards" aria-label="App categories">
           <button class="card category-button" type="button" aria-expanded="false" aria-controls="android-apps-panel" data-panel="android-apps-panel">
-            <div class="icon" aria-hidden="true">A</div>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+            </div>
             <h3>Android Apps</h3>
             <p>Browse practical Android apps published by Protus App Development.</p>
             <span class="category-action">View Android apps&nbsp; →</span>
           </button>
           <button class="card category-button" type="button" aria-expanded="false" aria-controls="mobile-games-panel" data-panel="mobile-games-panel">
-            <div class="icon" aria-hidden="true">G</div>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+                <line x1="6" y1="12" x2="10" y2="12"></line>
+                <line x1="8" y1="10" x2="8" y2="14"></line>
+                <circle cx="15.5" cy="13" r=".75" fill="currentColor"></circle>
+                <circle cx="17.5" cy="11" r=".75" fill="currentColor"></circle>
+              </svg>
+            </div>
             <h3>Mobile Games</h3>
             <p>Gameplay-led experiences designed around satisfying mechanics, clarity, and replay value.</p>
             <span class="category-action">View mobile games&nbsp; →</span>
           </button>
           <button class="card category-button" type="button" aria-expanded="false" aria-controls="upcoming-panel" data-panel="upcoming-panel">
-            <div class="icon" aria-hidden="true">+</div>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+              </svg>
+            </div>
             <h3>Upcoming</h3>
             <p>Preview apps and games currently in development at Protus.</p>
             <span class="category-action">View upcoming projects&nbsp; →</span>
@@ -488,6 +537,20 @@
               </div>
               <p>Keep track of free trials and stay ahead of upcoming charges. Surf free trials—and bail before the charge.</p>
               <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.trialsurfer.app&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Trial Surfer on Google Play">View on Google Play&nbsp; ↗</a>
+            </div>
+          </article>
+          <article class="card card-featured">
+            <img class="app-feature" src="rescue-ring-feature.png" width="1024" height="500" loading="lazy" alt="Rescue Ring — A discreet alert when you need an exit.">
+            <div class="app-details">
+              <div class="app-heading">
+                <img class="app-icon" src="rescue-ring-icon.png" width="512" height="512" loading="lazy" alt="">
+                <div>
+                  <span class="app-type">Android Apps</span>
+                  <h3>Rescue Ring</h3>
+                </div>
+              </div>
+              <p>A discreet alert when you need an exit. Schedule ringtone alerts with no account required and an ad-free option.</p>
+              <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.steve.rescuering&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Rescue Ring on Google Play">View on Google Play&nbsp; ↗</a>
             </div>
           </article>
         </div>
