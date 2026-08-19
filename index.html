@@ -137,7 +137,8 @@
       font-size: clamp(0.9rem, 2.2vw, 1.02rem);
       font-weight: 850;
       letter-spacing: -0.015em;
-      flex-shrink: 1;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     .brand-mark {
@@ -152,6 +153,7 @@
       font-weight: 850;
       color: #fff;
       letter-spacing: -0.02em;
+      white-space: nowrap;
     }
 
     .brand-suffix {
@@ -870,16 +872,32 @@
 
     @media (max-width: 580px) {
       .container {
-        padding-inline: 16px;
+        padding-inline: 14px;
       }
       nav {
-        min-height: 60px;
+        min-height: 58px;
+        gap: 8px;
+      }
+      .brand {
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+      }
+      .brand-name {
+        font-size: 0.94rem;
       }
       .brand-suffix {
         display: none;
       }
+      .nav-links {
+        gap: 2px;
+        flex-shrink: 0;
+      }
       .nav-links a {
-        padding: 6px 7px;
+        padding: 6px 8px;
         font-size: 0.8rem;
       }
       .hero {
@@ -919,6 +937,19 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding-inline: 10px;
+      }
+      .brand-name {
+        display: none;
+      }
+      .nav-links a {
+        padding: 5px 6px;
+        font-size: 0.78rem;
       }
     }
 
