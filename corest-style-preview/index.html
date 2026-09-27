@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#020b20">
+  <meta name="description" content="Protus App Development creates polished Android apps and mobile games.">
+  <title>Protus App Development | Android Apps &amp; Games</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root{--navy:#071a2f;--paper:#f0eee7;--ink:#152839;--muted:#52616b;--orange:#ff941f;--line:#c9cdc9;--blue:#186b9c}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:110px}body{margin:0;background:var(--navy);color:var(--ink);font-family:Inter,Arial,sans-serif;font-size:16px;line-height:1.65}a{color:inherit}button{font:inherit}img{display:block;max-width:100%;height:auto}button,a{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:6px}.container{width:min(1600px,88%);margin:auto}.skip-link{position:fixed;left:20px;top:-100px;z-index:100;background:white;padding:12px}.skip-link:focus{top:15px}
+header{position:fixed;inset:0 0 auto;z-index:30;padding:24px 0;pointer-events:none}header nav{display:flex;justify-content:space-between;align-items:center}header a,header button,header ul{pointer-events:auto}.brand{display:flex;align-items:center;gap:14px;text-decoration:none;padding:10px 18px 10px 10px;background:var(--navy);color:white}.brand-mark{width:42px;height:42px;object-fit:contain}.brand-name{font-size:19px;font-weight:600;letter-spacing:.03em}.brand-suffix{font-weight:400;font-size:13px;display:block;line-height:1.1;color:#c6d1dc}.nav-links{display:flex;list-style:none;padding:14px 22px;margin:0;gap:30px;background:var(--navy);color:white}.nav-links a{text-decoration:none;font-size:14px}.nav-links a:hover{color:var(--orange)}.menu-toggle{display:none}
+main{position:relative}.hero{height:100svh;min-height:700px;position:sticky;top:0;overflow:hidden;color:#f6f4ed;background:radial-gradient(ellipse at 80% 30%,#123d58 0,transparent 65%),var(--navy)}.hero-grid{height:100%;display:flex;align-items:center;position:relative}.hero-copy{z-index:2;width:76%;padding:115px 0 90px}.eyebrow,.section-kicker{text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:500;margin-bottom:30px}h1,h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;line-height:1.03;letter-spacing:-.045em;margin:0}h1{font-size:clamp(64px,7.7vw,145px);max-width:1100px}h1 em{font-weight:400;color:#ffac4d}p{margin:24px 0}.hero-copy>p{max-width:530px;color:#d1dce4;font-size:17px;line-height:1.7}.actions{display:flex;gap:24px;align-items:center;margin-top:36px}.button{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;padding:15px 24px;text-decoration:none;font-size:14px;font-weight:500;border:1px solid transparent;transition:background .2s,color .2s}.button-primary{background:var(--navy);color:white}.hero .button-primary{background:var(--orange);color:#101e2a}.button-primary:hover{background:#245875;color:white}.button-secondary{padding-inline:0;border-bottom:1px solid #6c7f8f}.logo-stage{position:absolute;right:-10%;width:65%;top:15%;opacity:.23;pointer-events:none}.hero-logo{width:100%;height:auto}.hero-scroll{position:absolute;bottom:26px;left:0;right:0;display:flex;justify-content:space-between;color:#d0dbe1;border-top:1px solid #ffffff35;padding-top:18px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+#about,#apps,#contact,footer{position:relative;background:var(--paper)}#about{padding:140px 0 110px;z-index:2}h2{font-size:clamp(44px,5.3vw,88px);max-width:1100px}.about-panel>div:first-child{display:grid;grid-template-columns:1fr 1fr;gap:15px 80px}.about-panel .section-kicker,.about-panel h2{grid-column:1/-1}.about-panel h2{max-width:1050px}.about-panel>div:first-child>p{grid-column:2;max-width:600px;color:var(--muted);margin-top:50px;font-size:18px}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:45px;margin-top:70px;border-top:1px solid var(--line);padding-top:35px;counter-reset:principle}.principle{display:flex;gap:18px}.principle-icon-badge{display:none}.principle:before{counter-increment:principle;content:'0' counter(principle);color:var(--blue);font-size:14px}.principle strong{font-weight:500;font-size:18px;display:block}.principle small{display:block;color:var(--muted);font-size:14px;line-height:1.7;margin-top:12px}
+#apps{z-index:3;padding:35px 0 110px}.section-lead{max-width:650px;color:var(--muted);margin:26px 0 50px}.apps-categories{display:block}.category-item{margin-top:28px}.category-button{color:var(--ink);background:transparent;border:0;border-top:1px solid var(--line);padding:26px 0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:30px;text-align:left;cursor:pointer}.category-top-row .icon,.category-content p,.category-action .action-label{display:none}.category-content{order:-1;margin-right:auto}.category-content h3{font-family:Georgia,serif;font-weight:400;font-size:36px;letter-spacing:-.025em;margin:0}.category-badge{font-size:13px;color:var(--muted)}.chevron-icon{width:24px;height:24px;transition:transform .3s}.category-button[aria-expanded=true] .chevron-icon{transform:rotate(180deg)}.category-button:hover h3{color:var(--blue)}.app-panel{display:grid;grid-template-columns:1fr 1fr;gap:60px 35px;padding:15px 0 55px}.app-panel[hidden]{display:none}.card-featured{min-width:0}.card-featured:first-child{grid-column:1/-1}.app-feature-wrap{overflow:hidden;background:#dae0df}.app-feature{width:100%;aspect-ratio:1024/500;object-fit:contain;transition:transform .7s}.card-featured:hover .app-feature{transform:scale(1.015)}.app-details{padding:25px 0 0;display:grid;grid-template-columns:1fr auto;gap:12px 20px}.app-heading{display:flex;align-items:center;gap:15px}.app-icon{width:52px;height:52px;object-fit:contain;border-radius:10px}.app-type{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.app-title-group h3{font-size:29px;line-height:1.2;font-weight:400;letter-spacing:-.03em;margin:2px 0 0}.app-details>p{grid-column:1/-1;color:var(--muted);max-width:630px;font-size:16px;margin:2px 0}.store-link,.coming-soon{grid-column:1/-1;justify-self:start;margin-top:8px}.store-link{background:transparent;color:var(--ink);padding:10px 0;border-bottom:1px solid var(--ink)}.store-link:hover{background:transparent;color:var(--blue)}.coming-soon{font-size:14px;color:var(--blue)}
+#contact{z-index:4;background:var(--navy);color:var(--paper);padding:120px 0}.contact{display:grid;grid-template-columns:1fr auto;align-items:end;gap:55px}.contact h2{max-width:900px}.contact p{max-width:610px;color:#bdcad5}.contact .button{background:var(--orange);color:var(--navy);white-space:nowrap}footer{z-index:4;background:var(--navy);color:#bdcad5;font-size:13px}.footer-row{display:flex;justify-content:space-between;gap:25px;border-top:1px solid #ffffff30;padding:28px 0 40px}footer a{text-decoration:none}.reveal{opacity:1;transform:none}.motion-ready .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}.motion-ready .reveal.visible{opacity:1;transform:none}
+@media(min-width:1100px){.card-featured:first-child .app-details{grid-template-columns:1fr 1fr auto;align-items:center}.card-featured:first-child .app-details>p{grid-column:auto;margin:0}.card-featured:first-child .store-link,.card-featured:first-child .coming-soon{grid-column:auto}}
+@media(max-width:800px){.container{width:88%}header{padding:16px 0}.brand-name{font-size:16px}.menu-toggle{display:block;background:var(--navy);color:white;border:0;width:56px;height:56px;font-size:14px;cursor:pointer}.nav-links{display:none;position:absolute;top:86px;left:6%;right:6%;flex-direction:column;gap:0;padding:15px 25px}.nav-links.open{display:flex}.nav-links a{display:block;padding:14px 0}.hero{min-height:680px;max-height:1000px}.hero-copy{width:100%;padding-top:120px}h1{font-size:clamp(56px,11vw,88px)}.hero-copy>p{font-size:16px;max-width:450px}.logo-stage{width:100%;right:-38%;top:24%;opacity:.15}.hero-scroll{font-size:11px}.hero-scroll span:last-child{display:none}#about{padding:85px 0 65px}.about-panel>div:first-child{display:block}.about-panel>div:first-child>p{margin-top:35px;font-size:16px}.principles{grid-template-columns:1fr;gap:26px;margin-top:40px}.app-panel{grid-template-columns:1fr;gap:40px}.card-featured:first-child{grid-column:auto}.category-content h3{font-size:28px}.category-button{gap:14px}.category-badge{font-size:12px}.app-title-group h3{font-size:27px}.contact{grid-template-columns:1fr;gap:15px}.contact>.button{justify-self:start}#contact{padding:80px 0}.footer-row{flex-direction:column;gap:8px}.section-kicker,.eyebrow{font-size:12px}#apps{padding-bottom:65px}.actions{gap:20px}.button{padding:13px 18px}.button-secondary,.store-link{padding-inline:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero{position:relative}*,*::before,*::after{transition:none!important;animation:none!important}.motion-ready .reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Protus App Development home">
+          <img class="brand-mark" src="protus-emblem.png" width="1254" height="1254" alt="Protus Emblem">
+          <span class="brand-name">Protus <span class="brand-suffix">App Dev</span></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-links">Menu</button><ul class="nav-links" id="main-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#apps">Apps &amp; Games</a></li>
+          <li><a href="#contact">Support</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid"><div class="hero-scroll"><span>Independent ideas. Made for Android.</span><span>Scroll to explore ↓</span></div>
+        <div class="hero-copy">
+          <div class="eyebrow">Independent Android Developer</div>
+          <h1>Thoughtful apps.<br><em>Enjoyable games.</em></h1>
+          <p>Protus App Development creates focused mobile experiences for Android—built around clear ideas, dependable performance, and satisfying interaction.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#apps">Explore our work</a>
+            <a class="button button-secondary" href="#contact">Get support</a>
+          </div>
+        </div>
+        <div class="logo-stage" aria-label="Protus App Development branding">
+          <div class="logo-stage-backdrop" aria-hidden="true"></div>
+          <div class="hero-logo-wrap">
+            <img class="hero-logo" src="protus-emblem.png" width="1254" height="1254" alt="Protus App Development logo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-panel">
+          <div>
+            <div class="section-kicker">About</div>
+            <h2>Independent development, carefully considered.</h2>
+            <p>We build practical Android applications and engaging mobile games with a clear goal: make every experience straightforward to understand and rewarding to use. From first concept to ongoing updates, quality and usability guide the work.</p>
+          </div>
+          <div class="principles" aria-label="Development principles">
+            <div class="principle">
+              <div class="principle-icon-badge" aria-hidden="true">
+                <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 7a5 5 0 1 0 5 5"></path>
+                  <path d="M21 3l-8.5 8.5"></path>
+                  <path d="M21 8V3h-5"></path>
+                </svg>
+              </div>
+              <div class="principle-content">
+                <strong>Purposeful design</strong>
+                <small>Useful features and focused gameplay without unnecessary complexity.</small>
+              </div>
+            </div>
+            <div class="principle">
+              <div class="principle-icon-badge" aria-hidden="true">
+                <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <polyline points="9 12 11.5 14.5 15.5 9.5"></polyline>
+                </svg>
+              </div>
+              <div class="principle-content">
+                <strong>Reliable experiences</strong>
+                <small>Responsive interfaces shaped by testing and careful refinement.</small>
+              </div>
+            </div>
+            <div class="principle">
+              <div class="principle-icon-badge" aria-hidden="true">
+                <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                  <path d="M8 16H3v5"></path>
+                </svg>
+              </div>
+              <div class="principle-content">
+                <strong>Built to improve</strong>
+                <small>Feedback and updates help every release grow stronger over time.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apps">
+      <div class="container">
+        <div class="section-kicker">Apps &amp; Games</div>
+        <h2>Mobile ideas, brought to life.</h2>
+        <p class="section-lead">Protus projects are made for Android and distributed through Google Play. Select a category below to explore releases and upcoming projects.</p>
+
+        <div class="apps-categories" aria-label="App categories and projects">
+          
+          <!-- Category 1: Android Apps -->
+          <div class="category-item">
+            <button class="card category-button" type="button" aria-expanded="true" aria-controls="android-apps-panel" id="tab-android-apps" data-panel="android-apps-panel">
+              <div class="category-top-row">
+                <div class="icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                  </svg>
+                </div>
+                <span class="category-badge">3 Apps Available</span>
+              </div>
+              <div class="category-content">
+                <h3>Android Apps</h3>
+                <p>Browse practical Android apps published by Protus App Development.</p>
+              </div>
+              <div class="category-action">
+                <span class="action-label">View Android apps</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </button>
+
+            <div class="app-panel" id="android-apps-panel" role="region" aria-labelledby="tab-android-apps">
+              <!-- Trial Surfer -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="trial-surfer-feature.png" width="1024" height="500" alt="Trial Surfer feature graphic">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="trial-surfer-icon.png" width="512" height="512" alt="Trial Surfer icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Android App</span>
+                      <h3>Trial Surfer</h3>
+                    </div>
+                  </div>
+                  <p>Keep track of free trials and stay ahead of upcoming charges. Surf free trials—and bail before the charge.</p>
+                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.trialsurfer.app&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Trial Surfer on Google Play">
+                    <span>View on Google Play</span>
+                    <span aria-hidden="true">&nearr;</span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- Rescue Ring -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="rescue-ring-feature.png" width="1024" height="500" alt="Rescue Ring feature graphic">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="rescue-ring-icon.png" width="512" height="512" alt="Rescue Ring icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Android App</span>
+                      <h3>Rescue Ring</h3>
+                    </div>
+                  </div>
+                  <p>A discreet alert when you need an exit. Schedule ringtone alerts with no account required and an ad-free option.</p>
+                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.steve.rescuering&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Rescue Ring on Google Play">
+                    <span>View on Google Play</span>
+                    <span aria-hidden="true">&nearr;</span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ParkLock -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="parklock-feature.png" width="1024" height="500" alt="ParkLock — Find your car. GPS map and parking reminders.">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="parklock-icon.png" width="1024" height="1024" alt="ParkLock icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Android App</span>
+                      <h3>ParkLock</h3>
+                    </div>
+                  </div>
+                  <p>Find your car with GPS map guidance and parking reminders. Never lose your parking spot again.</p>
+                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.parklock.parking&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View ParkLock on Google Play">
+                    <span>View on Google Play</span>
+                    <span aria-hidden="true">&nearr;</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Category 2: Mobile Games -->
+          <div class="category-item">
+            <button class="card category-button" type="button" aria-expanded="false" aria-controls="mobile-games-panel" id="tab-mobile-games" data-panel="mobile-games-panel">
+              <div class="category-top-row">
+                <div class="icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <circle cx="15.5" cy="13" r="0.75" fill="currentColor"></circle>
+                    <circle cx="17.5" cy="11" r="0.75" fill="currentColor"></circle>
+                  </svg>
+                </div>
+                <span class="category-badge">1 Game Available</span>
+              </div>
+              <div class="category-content">
+                <h3>Mobile Games</h3>
+                <p>Gameplay-led experiences designed around satisfying mechanics, clarity, and replay value.</p>
+              </div>
+              <div class="category-action">
+                <span class="action-label">View mobile games</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </button>
+
+            <div class="app-panel" id="mobile-games-panel" role="region" aria-labelledby="tab-mobile-games" hidden>
+              <!-- Gym Buddies -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="gym-buddies-feature.jpg" width="1024" height="500" alt="Gym Buddies feature graphic">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="gym-buddies-icon.png" width="512" height="512" alt="Gym Buddies icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Mobile Game</span>
+                      <h3>Gym Buddies</h3>
+                    </div>
+                  </div>
+                  <p>Bulk up, stay passable, and get gains in this addictive mobile gym progression game.</p>
+                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.gymbuddies.game&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Gym Buddies on Google Play">
+                    <span>View on Google Play</span>
+                    <span aria-hidden="true">&nearr;</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Category 3: Upcoming -->
+          <div class="category-item">
+            <button class="card category-button" type="button" aria-expanded="false" aria-controls="upcoming-panel" id="tab-upcoming" data-panel="upcoming-panel">
+              <div class="category-top-row">
+                <div class="icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                  </svg>
+                </div>
+                <span class="category-badge">3 Projects Preview</span>
+              </div>
+              <div class="category-content">
+                <h3>Upcoming</h3>
+                <p>Preview apps and games currently in development at Protus.</p>
+              </div>
+              <div class="category-action">
+                <span class="action-label">View upcoming projects</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </button>
+
+            <div class="app-panel" id="upcoming-panel" role="region" aria-labelledby="tab-upcoming" hidden>
+              <!-- Vendor Vault -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="vendor-vault-feature.png" width="1024" height="500" alt="Vendor Vault — Stock. Sales. Suppliers. Sorted.">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="vendor-vault-icon.png" width="512" height="512" alt="Vendor Vault icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Upcoming App</span>
+                      <h3>Vendor Vault</h3>
+                    </div>
+                  </div>
+                  <p>Stock. Sales. Suppliers. Sorted. A streamlined inventory, sales, and supplier management tool for vendors.</p>
+                  <div class="coming-soon">Coming soon to Android</div>
+                </div>
+              </article>
+
+              <!-- TipSplit -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="tipsplit-feature.png" width="1024" height="500" alt="TipSplit — Tip with confidence. Split with ease.">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="tipsplit-icon.png" width="512" height="512" alt="TipSplit icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Upcoming App</span>
+                      <h3>TipSplit</h3>
+                    </div>
+                  </div>
+                  <p>Tip with confidence. Split with ease. Equal splits, meal subtotals, and custom amounts make splitting the bill effortless.</p>
+                  <div class="coming-soon">Coming soon to Android</div>
+                </div>
+              </article>
+
+              <!-- Gym Survivors -->
+              <article class="card-featured">
+                <div class="app-feature-wrap">
+                  <img class="app-feature" src="gym-survivors-feature.png" width="1024" height="500" alt="Gym Survivors feature graphic">
+                </div>
+                <div class="app-details">
+                  <div class="app-heading">
+                    <img class="app-icon" src="gym-survivors-icon.png" width="512" height="512" alt="Gym Survivors icon">
+                    <div class="app-title-group">
+                      <span class="app-type">Upcoming Game</span>
+                      <h3>Gym Survivors</h3>
+                    </div>
+                  </div>
+                  <p>Survive wild workouts, evolve gym gear and build unstoppable gainz.</p>
+                  <div class="coming-soon">Coming soon to Android</div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact">
+          <div>
+            <div class="section-kicker">Support &amp; Contact</div>
+            <h2>Need help with a Protus app?</h2>
+            <p>For product support, feedback, bug reports, or general enquiries, contact Protus App Development by email.</p>
+          </div>
+          <a class="button button-primary" href="mailto:protusappdev@gmail.com">Email Support</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>&copy; 2026 Protus App Development. All rights reserved.</span>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <script>
+    const categoryButtons = document.querySelectorAll('.category-button');
+    const appPanels = document.querySelectorAll('.app-panel');
+
+    function updateActionLabels() {
+      categoryButtons.forEach((btn) => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        const label = btn.querySelector('.action-label');
+        if (label) {
+          const categoryName = btn.querySelector('h3') ? btn.querySelector('h3').textContent.trim() : 'category';
+          label.textContent = isOpen ? `Hide ${categoryName}` : `View ${categoryName}`;
+        }
+      });
+    }
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetPanelId = button.dataset.panel;
+        const targetPanel = document.getElementById(targetPanelId);
+        const isCurrentlyOpen = button.getAttribute('aria-expanded') === 'true';
+
+        // Close all panels
+        categoryButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+        appPanels.forEach((panel) => { panel.hidden = true; });
+
+        // If it wasn't open, open it
+        if (!isCurrentlyOpen && targetPanel) {
+          button.setAttribute('aria-expanded', 'true');
+          targetPanel.hidden = false;
+          
+          // On mobile, scroll so that the button and its new content are in clear view
+          if (window.innerWidth <= 860) {
+            setTimeout(() => {
+              const rect = button.getBoundingClientRect();
+              if (rect.top < 70 || rect.top > window.innerHeight - 200) {
+                button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+            }, 50);
+          }
+        }
+
+        updateActionLabels();
+      });
+    });
+
+    // Initialize labels on load
+    updateActionLabels();
+  </script>
+<script>
+const menuButton=document.querySelector('.menu-toggle');
+const menu=document.querySelector('.nav-links');
+function closeMenu(){menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu'}
+menuButton.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu'});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();menuButton.focus()}});
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+document.body.classList.add('motion-ready');
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});
+document.querySelectorAll('.about-panel h2,.principle,.card-featured,.contact h2').forEach(el=>{el.classList.add('reveal');observer.observe(el)});
+}
+</script></body>
+</html>
