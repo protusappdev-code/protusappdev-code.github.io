@@ -4,8 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#020b20">
-  <meta name="description" content="Protus App Development creates polished Android apps and mobile games.">
+  <meta name="description" content="Protus App Development is an independent studio creating polished Android apps and mobile games, available on Google Play.">
   <title>Protus App Development | Android Apps &amp; Games</title>
+
+  <!-- Social share previews. NOTE: replace relative image paths with absolute URLs (https://yourdomain/...) once deployed. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Protus App Development">
+  <meta property="og:title" content="Protus App Development | Android Apps &amp; Games">
+  <meta property="og:description" content="Thoughtful apps. Enjoyable games. Independent Android development, available on Google Play.">
+  <meta property="og:image" content="trial-surfer-feature.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Protus App Development | Android Apps &amp; Games">
+  <meta name="twitter:description" content="Thoughtful apps. Enjoyable games. Independent Android development, available on Google Play.">
+  <meta name="twitter:image" content="trial-surfer-feature.webp">
+
   <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
@@ -14,7 +26,9 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Variable Inter: every weight 400–900 (incl. 750/850) renders exactly -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {
       --ink: #f6f8fc;
@@ -22,10 +36,10 @@
       --muted-light: #c5d3e8;
       --page: #020b20;
       --page-2: #07152d;
-      --card-bg: rgba(13, 31, 58, 0.72);
-      --card-hover-bg: rgba(18, 42, 78, 0.85);
-      --card-active-bg: linear-gradient(145deg, rgba(20, 52, 92, 0.92), rgba(9, 27, 54, 0.88));
+      --surface: rgba(13, 31, 58, 0.72);
+      --surface-hover: rgba(18, 42, 78, 0.9);
       --line: rgba(255, 255, 255, 0.1);
+      --line-strong: rgba(255, 255, 255, 0.18);
       --line-active: rgba(101, 184, 255, 0.55);
       --blue: #3d8dd6;
       --blue-bright: #65b8ff;
@@ -36,31 +50,25 @@
       --radius-lg: 24px;
       --radius-md: 18px;
       --radius-sm: 12px;
+      --header-h: 68px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      min-width: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
 
     html {
       scroll-behavior: smooth;
       overflow-x: hidden;
-      width: 100%;
-      max-width: 100%;
+      scroll-padding-top: calc(var(--header-h) + 12px);
     }
 
     body {
       overflow-x: hidden;
-      width: 100%;
-      max-width: 100%;
       min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at 15% 10%, rgba(25, 110, 189, 0.22), transparent 32rem),
-        radial-gradient(circle at 88% 30%, rgba(255, 148, 31, 0.1), transparent 26rem),
+        radial-gradient(circle at 15% 6%, rgba(25, 110, 189, 0.24), transparent 34rem),
+        radial-gradient(circle at 90% 22%, rgba(255, 148, 31, 0.1), transparent 28rem),
         linear-gradient(180deg, var(--page) 0%, var(--page-2) 50%, var(--page) 100%);
       font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
@@ -68,907 +76,601 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    button { font-family: inherit; border: none; background: none; color: inherit; cursor: pointer; }
 
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-
-    button {
-      font-family: inherit;
-      border: none;
-      background: none;
-      color: inherit;
+    /* Consistent keyboard focus everywhere */
+    :focus-visible {
+      outline: 3px solid var(--blue-bright);
+      outline-offset: 3px;
+      border-radius: 8px;
     }
 
     .container {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1160px;
       margin-inline: auto;
       padding-inline: clamp(16px, 4vw, 28px);
     }
 
     .skip-link {
-      position: fixed;
-      left: 16px;
-      top: 14px;
-      z-index: 100;
-      padding: 10px 16px;
-      color: #061123;
-      background: #fff;
-      border-radius: var(--radius-sm);
-      font-weight: 800;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      transform: translateY(-200%);
-      opacity: 0;
-      pointer-events: none;
+      position: fixed; left: 16px; top: 14px; z-index: 100;
+      padding: 10px 16px; color: #061123; background: #fff;
+      border-radius: var(--radius-sm); font-weight: 800;
+      transform: translateY(-200%); opacity: 0;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
-    .skip-link:focus,
-    .skip-link:focus-visible {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .skip-link:focus-visible { transform: translateY(0); opacity: 1; }
 
-    /* ---------------- HEADER & NAVIGATION ---------------- */
+    /* ---------------- HEADER ---------------- */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      border-bottom: 1px solid var(--line);
-      background: rgba(2, 11, 32, 0.85);
+      position: sticky; top: 0; z-index: 60;
+      border-bottom: 1px solid transparent;
+      background: rgba(2, 11, 32, 0.6);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    header.scrolled {
+      background: rgba(2, 11, 32, 0.88);
+      border-bottom-color: var(--line);
     }
 
     nav {
-      min-height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      min-height: var(--header-h);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      display: inline-flex; align-items: center; gap: 10px;
       font-size: clamp(0.9rem, 2.2vw, 1.02rem);
-      font-weight: 850;
-      letter-spacing: -0.015em;
-      flex-shrink: 0;
-      white-space: nowrap;
+      font-weight: 850; letter-spacing: -0.02em; white-space: nowrap;
     }
-
     .brand-mark {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
+      width: 34px; height: 34px; object-fit: contain;
       filter: drop-shadow(0 4px 12px rgba(61, 141, 214, 0.4));
-      flex-shrink: 0;
     }
+    .brand-suffix { color: var(--muted-light); font-weight: 600; }
 
-    .brand-name {
-      font-weight: 850;
-      color: #fff;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-    }
-
-    .brand-suffix {
-      color: var(--muted-light);
-      font-weight: 600;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      list-style: none;
-      flex-shrink: 0;
-    }
-
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
     .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 11px;
+      position: relative;
+      display: inline-flex; align-items: center;
+      padding: 7px 12px;
       color: var(--muted-light);
       border-radius: 9px;
-      font-size: 0.86rem;
-      font-weight: 700;
+      font-size: 0.86rem; font-weight: 700; white-space: nowrap;
       transition: color 0.2s ease, background 0.2s ease;
-      white-space: nowrap;
     }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    /* ---------------- HERO SECTION ---------------- */
-    .hero {
-      padding: clamp(32px, 6vw, 72px) 0 clamp(44px, 8vw, 84px);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
-      align-items: center;
-      gap: clamp(28px, 5vw, 56px);
-    }
-
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      color: #badcff;
-      font-size: 0.78rem;
-      font-weight: 850;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
+    .nav-links a::after {
       content: "";
-      width: 22px;
-      height: 2px;
+      position: absolute; left: 12px; right: 12px; bottom: 2px;
+      height: 2px; border-radius: 2px;
       background: var(--orange);
-      border-radius: 2px;
-      flex-shrink: 0;
+      transform: scaleX(0);
+      transition: transform 0.3s var(--ease-out);
     }
+    .nav-links a:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
+    .nav-links a[aria-current="true"] { color: #fff; }
+    .nav-links a[aria-current="true"]::after { transform: scaleX(1); }
 
-    h1 {
-      font-size: clamp(2.2rem, 5vw, 4.3rem);
-      line-height: 1.06;
-      letter-spacing: -0.045em;
-      font-weight: 900;
-      margin-bottom: 18px;
-      max-width: 680px;
-    }
-
-    .hero-copy > p {
-      max-width: 580px;
-      margin-bottom: 28px;
-      color: var(--muted);
-      font-size: clamp(0.96rem, 1.5vw, 1.12rem);
-      line-height: 1.65;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      width: 100%;
-    }
-
+    /* ---------------- BUTTONS ---------------- */
     .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 48px;
-      padding: 12px 22px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 48px; padding: 12px 22px;
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
-      font-size: 0.92rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      cursor: pointer;
+      font-size: 0.92rem; font-weight: 800; letter-spacing: -0.01em;
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
       touch-action: manipulation;
     }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
+    .button:hover { transform: translateY(-2px); }
     .button-primary {
-      color: #040e24;
-      border-color: transparent;
+      color: #040e24; border-color: transparent;
       background: linear-gradient(135deg, #ffffff 0%, #d8eaff 100%);
       box-shadow: 0 10px 24px rgba(79, 154, 230, 0.28);
     }
+    .button-primary:hover { box-shadow: 0 14px 32px rgba(79, 154, 230, 0.42); }
+    .button-secondary { background: rgba(255, 255, 255, 0.05); color: #e8effc; }
+    .button-secondary:hover { border-color: rgba(255, 255, 255, 0.28); background: rgba(255, 255, 255, 0.09); }
+    .button svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-    .button-primary:hover {
-      box-shadow: 0 14px 32px rgba(79, 154, 230, 0.4);
-      background: linear-gradient(135deg, #ffffff 0%, #ebf4ff 100%);
-    }
-
-    .button-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: #e8effc;
-    }
-
-    .button-secondary:hover {
-      border-color: rgba(255, 255, 255, 0.28);
-      background: rgba(255, 255, 255, 0.09);
-    }
-
-    .logo-stage {
+    /* ---------------- HERO ---------------- */
+    .hero {
+      padding: clamp(36px, 7vw, 88px) 0 clamp(48px, 8vw, 96px);
+      overflow: hidden;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 10px;
     }
-
-    .logo-stage-backdrop {
-      position: absolute;
-      inset: 0;
-      margin: auto;
-      width: min(100%, 340px);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(20, 91, 161, 0.32) 0%, rgba(5, 20, 49, 0.15) 60%, transparent 75%);
-      border: 1px solid rgba(96, 182, 255, 0.12);
-      box-shadow: 0 0 60px rgba(25, 110, 189, 0.2);
+    /* faint grid texture behind the hero */
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 65%);
+      -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 65%);
       pointer-events: none;
-      z-index: 1;
     }
 
-    .hero-logo-wrap {
+    .hero-grid {
       position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 420px;
-      display: flex;
-      justify-content: center;
-      filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.3));
-    }
-
-    .hero-logo {
-      width: 100%;
-      max-height: 270px;
-      object-fit: contain;
-    }
-
-    /* ---------------- SECTION COMMON STYLES ---------------- */
-    section {
-      padding: clamp(48px, 7vw, 84px) 0;
-      position: relative;
-    }
-
-    .section-kicker {
-      margin-bottom: 8px;
-      color: var(--orange);
-      font-size: 0.77rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      margin-bottom: 14px;
-      font-size: clamp(1.8rem, 3.6vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      font-weight: 850;
-    }
-
-    .section-lead {
-      max-width: 650px;
-      margin-bottom: clamp(26px, 4vw, 40px);
-      color: var(--muted);
-      font-size: clamp(0.94rem, 1.4vw, 1.05rem);
-      line-height: 1.6;
-    }
-
-    /* ---------------- ABOUT SECTION ---------------- */
-    .about-panel {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(28px, 5vw, 48px);
-      padding: clamp(22px, 4vw, 44px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, rgba(16, 40, 72, 0.75), rgba(6, 20, 44, 0.6));
-      box-shadow: var(--shadow);
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+      gap: clamp(32px, 6vw, 72px);
     }
 
-    .about-panel p {
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 18px;
+      color: #badcff;
+      font-size: 0.78rem; font-weight: 850;
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: ""; width: 22px; height: 2px;
+      background: var(--orange); border-radius: 2px;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5.2vw, 4.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      font-weight: 900;
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    h1 .accent {
+      background: linear-gradient(100deg, #65b8ff 0%, #9fd2ff 45%, #ffb35c 100%);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy > p {
+      max-width: 560px;
+      margin-bottom: 30px;
       color: var(--muted);
-      font-size: clamp(0.94rem, 1.35vw, 1.02rem);
+      font-size: clamp(1rem, 1.5vw, 1.14rem);
       line-height: 1.65;
     }
 
-    .principles {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      justify-content: center;
-    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    .principle {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      padding: 14px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.03);
-      transition: background 0.2s ease, border-color 0.2s ease;
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 40px);
+      margin-top: 36px; padding-top: 24px;
+      border-top: 1px solid var(--line);
+      list-style: none;
     }
-
-    .principle:hover {
-      background: rgba(255, 255, 255, 0.055);
-      border-color: rgba(101, 184, 255, 0.25);
-    }
-
-    .principle-icon-badge {
-      flex: 0 0 36px;
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      color: #65b8ff;
-      border-radius: 10px;
-      background: rgba(61, 141, 214, 0.12);
-      border: 1px solid rgba(101, 184, 255, 0.24);
-      margin-top: 2px;
-      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .principle:hover .principle-icon-badge {
-      color: #badcff;
-      background: rgba(61, 141, 214, 0.24);
-      border-color: rgba(101, 184, 255, 0.5);
-      box-shadow: 0 0 16px rgba(101, 184, 255, 0.25);
-    }
-
-    .principle-icon {
-      width: 18px;
-      height: 18px;
+    .hero-stats strong {
       display: block;
+      font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+      font-weight: 850; letter-spacing: -0.03em; line-height: 1.1;
+      color: #fff;
     }
+    .hero-stats span { color: var(--muted); font-size: 0.84rem; font-weight: 600; }
 
-    .principle-content strong {
-      display: block;
-      font-size: 0.96rem;
-      font-weight: 750;
-      margin-bottom: 2px;
-      color: #f1f6ff;
-    }
-
-    .principle-content small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.86rem;
-      line-height: 1.5;
-    }
-
-    /* ---------------- APPS & GAMES (ACCORDION / TAB ARCHITECTURE) ---------------- */
-    .apps-categories {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      width: 100%;
-    }
-
-    /* Desktop Grid layout: 3 tabs on top row, active panel on row 2 spanning full width */
-    @media (min-width: 861px) {
-      .apps-categories {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-      .category-item {
-        display: contents;
-      }
-      .category-item .card.category-button {
-        grid-row: 1;
-      }
-      .category-item .app-panel {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        margin-top: 8px;
-      }
-    }
-
-    /* Mobile Accordion layout: stacked items with panel DIRECTLY under clicked category button */
-    @media (max-width: 860px) {
-      .apps-categories {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-      .category-item {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        width: 100%;
-      }
-    }
-
-    .card.category-button {
-      width: 100%;
-      text-align: left;
-      padding: clamp(18px, 3vw, 24px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--card-bg);
-      box-shadow: var(--shadow-sm);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 210px;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    /* App icon mosaic */
+    .hero-visual {
       position: relative;
+      display: grid; place-items: center;
+      perspective: 1200px;
+    }
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      width: 78%; aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61, 141, 214, 0.35) 0%, rgba(255, 148, 31, 0.1) 45%, transparent 70%);
+      filter: blur(20px);
+    }
+    .icon-mosaic {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(12px, 2vw, 20px);
+      width: min(100%, 420px);
+      transform: rotateX(8deg) rotateY(-14deg) rotateZ(4deg);
+      transform-style: preserve-3d;
+    }
+    .mosaic-tile {
+      aspect-ratio: 1;
+      border-radius: 24%;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      background: #0b1f3d;
+      animation: floatTile 7s ease-in-out infinite;
+    }
+    .mosaic-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s var(--ease-out), filter 0.35s ease; }
+    .mosaic-tile:nth-child(2n) { animation-delay: -2s; }
+    .mosaic-tile:nth-child(3n) { animation-delay: -4s; }
+
+    /* Clickable tiles */
+    a.mosaic-tile {
+      position: relative;
+      display: block;
+      cursor: pointer;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    a.mosaic-tile:hover,
+    a.mosaic-tile:focus-visible {
+      border-color: rgba(255, 255, 255, 0.55);
+      box-shadow: 0 0 0 3px rgba(101, 184, 255, 0.45), 0 22px 48px rgba(0, 0, 0, 0.55);
+      outline: none;
+      border-radius: 24%;
+    }
+    a.mosaic-tile:hover img,
+    a.mosaic-tile:focus-visible img { transform: scale(1.08); }
+    .tile-label {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 18px 6px 7px;
+      background: linear-gradient(transparent, rgba(2, 11, 32, 0.92));
+      color: #fff;
+      font-size: clamp(0.62rem, 1.1vw, 0.74rem);
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.2;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s var(--ease-out);
+      pointer-events: none;
+    }
+    a.mosaic-tile:hover .tile-label,
+    a.mosaic-tile:focus-visible .tile-label { opacity: 1; transform: none; }
+    /* Touch screens have no hover, so always show names there */
+    @media (hover: none) {
+      .tile-label { opacity: 1; transform: none; font-size: 0.6rem; padding-top: 14px; }
+    }
+
+    /* Card highlight after jumping from a hero icon */
+    .app-card.is-target {
+      animation: cardHighlight 1.8s ease-out;
+    }
+    @keyframes cardHighlight {
+      0%, 30% { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(255, 148, 31, 0.35), var(--shadow); }
+      100% { box-shadow: var(--shadow-sm); }
+    }
+    .mosaic-tile.center {
+      display: grid; place-items: center;
+      background: radial-gradient(circle at 30% 25%, #17345f, #06142c 75%);
+      border-color: rgba(101, 184, 255, 0.45);
+      box-shadow: 0 0 0 6px rgba(101, 184, 255, 0.08), 0 22px 50px rgba(25, 110, 189, 0.45);
+    }
+    .mosaic-tile.center img { width: 62%; height: auto; object-fit: contain; }
+
+    @keyframes floatTile {
+      0%, 100% { transform: translateZ(0) translateY(0); }
+      50% { transform: translateZ(20px) translateY(-6px); }
+    }
+
+    /* ---------------- SECTIONS ---------------- */
+    section { padding: clamp(56px, 8vw, 100px) 0; position: relative; }
+
+    .section-kicker {
+      margin-bottom: 10px;
+      color: var(--orange);
+      font-size: 0.77rem; font-weight: 900;
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.85rem, 3.6vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.04em; font-weight: 850;
+    }
+    .section-lead {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(0.96rem, 1.4vw, 1.06rem);
+      line-height: 1.6;
+    }
+
+    /* ---------------- ABOUT (open layout, no panel) ---------------- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(32px, 6vw, 72px);
+      align-items: start;
+    }
+    .about-grid .section-lead + .section-lead { margin-top: 14px; }
+
+    .principles { display: grid; gap: 14px; }
+    .principle {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 18px 20px;
+      border-left: 2px solid rgba(101, 184, 255, 0.25);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 85%);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .principle:hover {
+      border-left-color: var(--orange);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 85%);
+    }
+    .principle-icon-badge {
+      flex: 0 0 40px; width: 40px; height: 40px;
+      display: grid; place-items: center;
+      color: var(--blue-bright);
+      border-radius: 11px;
+      background: rgba(61, 141, 214, 0.14);
+      border: 1px solid rgba(101, 184, 255, 0.26);
+    }
+    .principle-icon-badge svg { width: 19px; height: 19px; }
+    .principle strong { display: block; font-size: 1rem; font-weight: 750; margin-bottom: 2px; color: #f1f6ff; }
+    .principle small { display: block; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+
+    /* ---------------- APPS: TABS ---------------- */
+    .apps-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+      margin-bottom: clamp(24px, 4vw, 36px);
+    }
+
+    .tablist {
+      display: inline-flex; gap: 4px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tablist::-webkit-scrollbar { display: none; }
+
+    .tab {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      color: var(--muted-light);
+      font-size: 0.9rem; font-weight: 750; white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
       touch-action: manipulation;
     }
-
-    .card.category-button:hover {
-      border-color: var(--line-active);
-      background: var(--card-hover-bg);
-      transform: translateY(-2px);
-    }
-
-    .card.category-button:focus-visible {
-      outline: 3px solid var(--blue-bright);
-      outline-offset: 3px;
-    }
-
-    .card.category-button[aria-expanded="true"] {
-      border-color: rgba(101, 184, 255, 0.75);
-      background: var(--card-active-bg);
-      box-shadow: 0 14px 36px rgba(10, 50, 95, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-
-    .category-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      width: 100%;
-    }
-
-    .icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      color: #fff;
-      background: linear-gradient(145deg, rgba(61, 141, 214, 0.95), rgba(16, 75, 133, 0.85));
-      border: 1px solid rgba(101, 184, 255, 0.3);
-      box-shadow: 0 8px 20px rgba(25, 110, 189, 0.3);
-      transition: transform 0.22s ease;
-      flex-shrink: 0;
-    }
-
-    .icon svg {
-      width: 22px;
-      height: 22px;
-      stroke-width: 2.2;
-    }
-
-    .category-item:nth-child(2) .icon {
-      background: linear-gradient(145deg, rgba(255, 148, 31, 0.95), rgba(190, 79, 11, 0.85));
-      border-color: rgba(255, 184, 102, 0.35);
-      box-shadow: 0 8px 20px rgba(255, 148, 31, 0.3);
-    }
-
-    .category-item:nth-child(3) .icon {
-      background: linear-gradient(145deg, rgba(56, 189, 248, 0.9), rgba(99, 102, 241, 0.85));
-      border-color: rgba(147, 197, 253, 0.35);
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
-    }
-
-    .category-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
+    .tab:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+    .tab svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .tab-count {
+      display: inline-grid; place-items: center;
+      min-width: 22px; height: 22px; padding: 0 6px;
       border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.06);
-      color: #badcff;
-      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.74rem; font-weight: 800;
     }
-
-    .category-content h3 {
-      font-size: 1.22rem;
-      font-weight: 800;
-      margin-bottom: 6px;
+    .tab[aria-selected="true"] {
       color: #fff;
+      background: linear-gradient(145deg, rgba(40, 96, 160, 0.95), rgba(18, 52, 98, 0.95));
+      box-shadow: 0 6px 18px rgba(10, 50, 95, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
+    .tab[aria-selected="true"] .tab-count { background: var(--orange); color: #1b0d00; }
 
-    .category-content p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 16px;
-    }
-
-    .category-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: auto;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      color: #badcff;
-      font-size: 0.84rem;
-      font-weight: 800;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .card.category-button[aria-expanded="true"] .category-action {
-      color: #fff;
-      border-top-color: rgba(255, 255, 255, 0.16);
-    }
-
-    .chevron-icon {
-      width: 18px;
-      height: 18px;
-      transition: transform 0.25s ease;
-      flex-shrink: 0;
-    }
-
-    .card.category-button[aria-expanded="true"] .chevron-icon {
-      transform: rotate(180deg);
-    }
-
-    /* ---------------- APP PANELS & FEATURED CARDS ---------------- */
-    .app-panel {
-      display: grid;
-      gap: 18px;
-      width: 100%;
-      animation: fadeInPanel 0.25s ease;
-    }
-
-    .app-panel[hidden] {
-      display: none;
-    }
-
+    .tab-panel { animation: fadeInPanel 0.35s var(--ease-out); }
+    .tab-panel[hidden] { display: none; }
     @keyframes fadeInPanel {
-      from {
-        opacity: 0;
-        transform: translateY(-6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .card-featured {
+    .panel-intro { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+
+    /* ---------------- APP CARDS (2-column grid) ---------------- */
+    .app-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(16px, 2.4vw, 24px);
+    }
+
+    .app-card {
+      display: flex; flex-direction: column;
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, rgba(16, 38, 70, 0.8), rgba(7, 22, 47, 0.7));
+      background: linear-gradient(160deg, rgba(16, 38, 70, 0.85), rgba(7, 22, 47, 0.75));
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-out), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(101, 184, 255, 0.4);
       box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: border-color 0.2s ease;
-      align-items: center;
     }
 
-    .card-featured:hover {
-      border-color: rgba(101, 184, 255, 0.35);
-    }
-
-    .app-feature-wrap {
-      width: 100%;
-      background: #030d22;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .app-media {
       position: relative;
-      overflow: hidden;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      height: 100%;
-    }
-
-    .app-feature {
-      width: 100%;
-      height: auto;
       aspect-ratio: 1024 / 500;
-      object-fit: contain;
-      display: block;
+      overflow: hidden;
+      background: #030d22;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-
-    .app-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: clamp(20px, 3.5vw, 36px);
-    }
-
-    .app-heading {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
-      width: 100%;
-    }
-
-    .app-icon {
-      flex: 0 0 58px;
-      width: 58px;
-      height: 58px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    .app-media img {
+      width: 100%; height: 100%;
       object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
     }
+    .app-card:hover .app-media img { transform: scale(1.04); }
 
-    .app-title-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
+    .app-body {
+      display: flex; flex-direction: column;
+      flex: 1;
+      padding: clamp(18px, 2.6vw, 26px);
     }
-
+    .app-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .app-icon {
+      flex: 0 0 56px; width: 56px; height: 56px;
+      margin-top: -46px; /* icon overlaps the feature image edge */
+      border: 2px solid rgba(7, 22, 47, 1);
+      border-radius: 15px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+      object-fit: cover;
+      background: #0b1f3d;
+      position: relative;
+    }
     .app-type {
       display: inline-block;
-      padding: 3px 9px;
       color: #9bcfff;
-      border: 1px solid rgba(101, 184, 255, 0.25);
-      border-radius: 999px;
-      background: rgba(61, 141, 214, 0.12);
-      font-size: 0.7rem;
-      font-weight: 850;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.7rem; font-weight: 850;
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
-
     .app-heading h3 {
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      font-weight: 850;
-      letter-spacing: -0.03em;
+      font-size: clamp(1.2rem, 2vw, 1.42rem);
+      font-weight: 850; letter-spacing: -0.03em; line-height: 1.15;
       color: #fff;
-      line-height: 1.15;
     }
-
-    .app-details p {
+    .app-body > p {
       color: var(--muted);
-      font-size: clamp(0.92rem, 1.3vw, 0.98rem);
-      line-height: 1.6;
-      margin-bottom: 20px;
+      font-size: 0.95rem; line-height: 1.6;
+      margin-bottom: 14px;
     }
 
-    .store-link {
-      width: 100%;
-      min-height: 48px;
+    .app-tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin-bottom: 20px; }
+    .app-tags li {
+      padding: 3px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted-light);
+      font-size: 0.74rem; font-weight: 650;
+      background: rgba(255, 255, 255, 0.03);
     }
+
+    .app-footer { margin-top: auto; display: flex; align-items: center; gap: 12px; }
+
+    .play-badge {
+      display: inline-block;
+      border-radius: 9px;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .play-badge img { height: 46px; width: auto; }
+    .play-badge:hover { transform: translateY(-2px); filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5)); }
 
     .coming-soon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 10px 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 44px; padding: 10px 16px;
       color: #dff7a5;
       border: 1px solid rgba(184, 230, 65, 0.32);
       border-radius: var(--radius-sm);
       background: rgba(151, 204, 31, 0.12);
-      font-size: 0.86rem;
-      font-weight: 850;
-      width: 100%;
+      font-size: 0.86rem; font-weight: 800;
+    }
+    .coming-soon::before {
+      content: "";
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.6);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.55); }
+      70% { box-shadow: 0 0 0 8px rgba(163, 230, 53, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0); }
     }
 
-    .empty-panel {
-      padding: clamp(26px, 5vw, 40px);
-      border: 1px dashed rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-md);
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.025);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .empty-panel p {
-      font-size: 0.94rem;
-      max-width: 480px;
-      margin-inline: auto;
-    }
-
-    /* ---------------- CONTACT / SUPPORT SECTION ---------------- */
+    /* ---------------- CONTACT ---------------- */
     .contact {
+      position: relative;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
       gap: clamp(20px, 4vw, 40px);
-      padding: clamp(26px, 5vw, 50px);
+      padding: clamp(28px, 5vw, 56px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius-lg);
       background:
-        radial-gradient(circle at 90% 15%, rgba(255, 148, 31, 0.2), transparent 18rem),
-        linear-gradient(125deg, rgba(14, 68, 118, 0.8), rgba(7, 24, 52, 0.9));
+        radial-gradient(circle at 90% 15%, rgba(255, 148, 31, 0.22), transparent 18rem),
+        linear-gradient(125deg, rgba(14, 68, 118, 0.85), rgba(7, 24, 52, 0.92));
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
-
-    .contact h2 {
-      max-width: 660px;
-    }
-
-    .contact p {
-      max-width: 620px;
-      color: var(--muted-light);
-      font-size: clamp(0.94rem, 1.35vw, 1.04rem);
-      line-height: 1.6;
-    }
+    .contact p { max-width: 600px; color: var(--muted-light); font-size: clamp(0.95rem, 1.35vw, 1.04rem); }
+    .contact-actions { display: flex; flex-direction: column; align-items: stretch; gap: 10px; text-align: center; }
+    .contact-email { color: var(--muted-light); font-size: 0.86rem; font-weight: 600; }
+    .contact-email a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .contact-email a:hover { border-bottom-color: #fff; }
 
     /* ---------------- FOOTER ---------------- */
     footer {
-      padding: 30px 0 40px;
+      padding: clamp(40px, 6vw, 64px) 0 32px;
       border-top: 1px solid var(--line);
       color: #8a9ab2;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
     }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+      gap: 32px;
     }
-
-    .footer-row a {
-      color: #b0c2db;
-      font-weight: 700;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 8px;
-    }
-
-    .footer-row a:hover {
+    .footer-logo { display: inline-block; }
+    .footer-logo img { height: 52px; width: auto; }
+    .footer-brand p { max-width: 300px; margin-top: 12px; line-height: 1.55; }
+    .footer-col h4 {
       color: #fff;
-      background: rgba(255, 255, 255, 0.06);
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .footer-col ul { list-style: none; display: grid; gap: 8px; }
+    .footer-col a { color: #b0c2db; transition: color 0.2s ease; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      margin-top: 40px; padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .footer-bottom a { color: #b0c2db; font-weight: 700; }
+    .footer-bottom a:hover { color: #fff; }
+
+    /* ---------------- SCROLL REVEAL (only when JS is on) ---------------- */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .js .reveal.is-visible { opacity: 1; transform: none; }
+    .js .reveal-delay-1 { transition-delay: 0.08s; }
+    .js .reveal-delay-2 { transition-delay: 0.16s; }
+
+    /* ---------------- RESPONSIVE ---------------- */
+    @media (max-width: 960px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
     }
 
-    /* ---------------- RESPONSIVE BREAKPOINTS ---------------- */
     @media (max-width: 860px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-      .hero-copy {
-        align-items: center;
-        text-align: center;
-      }
-      .hero-copy > p {
-        margin-inline: auto;
-      }
-      .actions {
-        justify-content: center;
-      }
-      .logo-stage {
-        order: -1;
-        max-width: 280px;
-        margin-inline: auto;
-        padding: 0;
-      }
-      .hero-logo-wrap {
-        max-width: 240px;
-      }
-      .about-panel {
-        grid-template-columns: 1fr;
-        gap: 26px;
-      }
-      .card-featured {
-        grid-template-columns: 1fr;
-      }
-      .app-feature-wrap {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .card.category-button {
-        min-height: 0;
-      }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-copy { text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .hero-copy > p { margin-inline: auto; }
+      .actions, .hero-stats { justify-content: center; }
+      .hero-visual { max-width: 300px; margin-inline: auto; }
+      .about-grid { grid-template-columns: 1fr; }
+      .app-grid { grid-template-columns: 1fr; }
+      .apps-head { align-items: flex-start; }
+      .tablist { width: 100%; }
+      .tab { flex: 1 0 auto; justify-content: center; }
     }
 
     @media (max-width: 580px) {
-      .container {
-        padding-inline: 14px;
-      }
-      nav {
-        min-height: 58px;
-        gap: 8px;
-      }
-      .brand {
-        gap: 8px;
-        flex-shrink: 0;
-      }
-      .brand-mark {
-        width: 30px;
-        height: 30px;
-      }
-      .brand-name {
-        font-size: 0.94rem;
-      }
-      .brand-suffix {
-        display: none;
-      }
-      .nav-links {
-        gap: 2px;
-        flex-shrink: 0;
-      }
-      .nav-links a {
-        padding: 6px 8px;
-        font-size: 0.8rem;
-      }
-      .hero {
-        padding: 20px 0 44px;
-      }
-      h1 {
-        font-size: clamp(1.95rem, 8.5vw, 2.5rem);
-      }
-      .actions {
-        flex-direction: column;
-        width: 100%;
-      }
-      .actions .button {
-        width: 100%;
-      }
-      .contact {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        padding: 22px 18px;
-      }
-      .contact .button {
-        width: 100%;
-      }
-      .app-heading {
-        gap: 12px;
-      }
-      .app-icon {
-        flex: 0 0 52px;
-        width: 52px;
-        height: 52px;
-        border-radius: 12px;
-      }
-      .app-details {
-        padding: 18px 16px 22px;
-      }
-      .footer-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
+      :root { --header-h: 58px; }
+      .container { padding-inline: 14px; }
+      .brand-mark { width: 30px; height: 30px; }
+      .brand-suffix { display: none; }
+      .nav-links { gap: 0; }
+      .nav-links a { padding: 6px 8px; font-size: 0.8rem; }
+      .nav-links a::after { left: 8px; right: 8px; }
+      .actions { flex-direction: column; width: 100%; }
+      .actions .button { width: 100%; }
+      .hero-stats { gap: 18px 28px; }
+      .tab { padding: 9px 12px; font-size: 0.84rem; }
+      .tab svg { display: none; }
+      .contact { grid-template-columns: 1fr; padding: 24px 18px; }
+      .footer-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 380px) {
-      .container {
-        padding-inline: 10px;
-      }
-      .brand-name {
-        display: none;
-      }
-      .nav-links a {
-        padding: 5px 6px;
-        font-size: 0.78rem;
-      }
+      .container { padding-inline: 10px; }
+      .brand-name { display: none; }
+      .nav-links a { padding: 5px 6px; font-size: 0.78rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -976,18 +678,20 @@
       *, *::before, *::after {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
       }
+      .js .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header>
+  <header id="site-header">
     <div class="container">
       <nav aria-label="Main navigation">
         <a class="brand" href="#top" aria-label="Protus App Development home">
-          <img class="brand-mark" src="protus-emblem.png" width="1254" height="1254" alt="Protus Emblem">
+          <img class="brand-mark" src="protus-emblem.webp" width="128" height="128" alt="">
           <span class="brand-name">Protus <span class="brand-suffix">App Dev</span></span>
         </a>
         <ul class="nav-links">
@@ -1000,408 +704,423 @@
   </header>
 
   <main id="main">
+    <!-- ================= HERO ================= -->
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Independent Android Developer</div>
-          <h1>Thoughtful apps. Enjoyable games.</h1>
-          <p>Protus App Development creates focused mobile experiences for Android—built around clear ideas, dependable performance, and satisfying interaction.</p>
-          <div class="actions">
-            <a class="button button-primary" href="#apps">Explore our work</a>
+          <div class="eyebrow reveal">Independent Android Studio</div>
+          <h1 class="reveal reveal-delay-1">Thoughtful apps. <span class="accent">Enjoyable games.</span></h1>
+          <p class="reveal reveal-delay-2">Protus App Development creates focused mobile experiences for Android—built around clear ideas, dependable performance, and satisfying interaction.</p>
+          <div class="actions reveal reveal-delay-2">
+            <a class="button button-primary" href="#apps">
+              Explore our work
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
             <a class="button button-secondary" href="#contact">Get support</a>
           </div>
+          <ul class="hero-stats reveal reveal-delay-2" aria-label="Studio at a glance">
+            <li><strong>6</strong><span>Live on Google Play</span></li>
+            <li><strong>2</strong><span>In development</span></li>
+            <li><strong>100%</strong><span>Android-focused</span></li>
+          </ul>
         </div>
-        <div class="logo-stage" aria-label="Protus App Development branding">
-          <div class="logo-stage-backdrop" aria-hidden="true"></div>
-          <div class="hero-logo-wrap">
-            <img class="hero-logo" src="protus-logo-dark.png" width="1679" height="937" alt="Protus App Development logo">
+
+        <div class="hero-visual reveal reveal-delay-1">
+          <div class="icon-mosaic" role="group" aria-label="Jump to an app">
+            <a class="mosaic-tile" href="#apps" data-app="Trial Surfer" data-tab="tab-apps"><img src="trial-surfer-icon.webp" width="256" height="256" alt=""><span class="tile-label">Trial Surfer</span></a>
+            <a class="mosaic-tile" href="#apps" data-app="Gym Buddies" data-tab="tab-games"><img src="gym-buddies-icon.webp" width="256" height="256" alt=""><span class="tile-label">Gym Buddies</span></a>
+            <a class="mosaic-tile" href="#apps" data-app="Rescue Ring" data-tab="tab-apps"><img src="rescue-ring-icon.webp" width="256" height="256" alt=""><span class="tile-label">Rescue Ring</span></a>
+            <a class="mosaic-tile" href="#apps" data-app="ParkLock" data-tab="tab-apps"><img src="parklock-icon.webp" width="256" height="256" alt=""><span class="tile-label">ParkLock</span></a>
+            <a class="mosaic-tile center" href="#about" aria-label="About Protus"><img src="protus-emblem.webp" width="128" height="128" alt=""></a>
+            <a class="mosaic-tile" href="#apps" data-app="Gym Survivors" data-tab="tab-games"><img src="gym-survivors-icon.webp" width="256" height="256" alt=""><span class="tile-label">Gym Survivors</span></a>
+            <a class="mosaic-tile" href="#apps" data-app="Vendor Vault" data-tab="tab-apps"><img src="vendor-vault-icon.webp" width="256" height="256" alt=""><span class="tile-label">Vendor Vault</span></a>
+            <a class="mosaic-tile" href="#apps" data-app="TipSplit" data-tab="tab-upcoming"><img src="tipsplit-icon.webp" width="256" height="256" alt=""><span class="tile-label">TipSplit</span></a>
+            <a class="mosaic-tile" href="#apps" data-app="FuelSum" data-tab="tab-upcoming"><img src="fuelsum-icon.webp" width="256" height="256" alt=""><span class="tile-label">FuelSum</span></a>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ================= ABOUT ================= -->
     <section id="about">
-      <div class="container">
-        <div class="about-panel">
-          <div>
-            <div class="section-kicker">About</div>
-            <h2>Independent development, carefully considered.</h2>
-            <p>We build practical Android applications and engaging mobile games with a clear goal: make every experience straightforward to understand and rewarding to use. From first concept to ongoing updates, quality and usability guide the work.</p>
+      <div class="container about-grid">
+        <div class="reveal">
+          <div class="section-kicker">About</div>
+          <h2>Independent development, carefully considered.</h2>
+          <p class="section-lead">We build practical Android applications and engaging mobile games with a clear goal: make every experience straightforward to understand and rewarding to use.</p>
+          <p class="section-lead">From first concept to ongoing updates, quality and usability guide the work.</p>
+        </div>
+        <div class="principles" aria-label="Development principles">
+          <div class="principle reveal">
+            <div class="principle-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle><path d="M12 7a5 5 0 1 0 5 5"></path><path d="M21 3l-8.5 8.5"></path><path d="M21 8V3h-5"></path>
+              </svg>
+            </div>
+            <div>
+              <strong>Purposeful design</strong>
+              <small>Useful features and focused gameplay without unnecessary complexity.</small>
+            </div>
           </div>
-          <div class="principles" aria-label="Development principles">
-            <div class="principle">
-              <div class="principle-icon-badge" aria-hidden="true">
-                <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 7a5 5 0 1 0 5 5"></path>
-                  <path d="M21 3l-8.5 8.5"></path>
-                  <path d="M21 8V3h-5"></path>
-                </svg>
-              </div>
-              <div class="principle-content">
-                <strong>Purposeful design</strong>
-                <small>Useful features and focused gameplay without unnecessary complexity.</small>
-              </div>
+          <div class="principle reveal reveal-delay-1">
+            <div class="principle-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11.5 14.5 15.5 9.5"></polyline>
+              </svg>
             </div>
-            <div class="principle">
-              <div class="principle-icon-badge" aria-hidden="true">
-                <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  <polyline points="9 12 11.5 14.5 15.5 9.5"></polyline>
-                </svg>
-              </div>
-              <div class="principle-content">
-                <strong>Reliable experiences</strong>
-                <small>Responsive interfaces shaped by testing and careful refinement.</small>
-              </div>
+            <div>
+              <strong>Reliable experiences</strong>
+              <small>Responsive interfaces shaped by testing and careful refinement.</small>
             </div>
-            <div class="principle">
-              <div class="principle-icon-badge" aria-hidden="true">
-                <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-                  <path d="M21 3v5h-5"></path>
-                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-                  <path d="M8 16H3v5"></path>
-                </svg>
-              </div>
-              <div class="principle-content">
-                <strong>Built to improve</strong>
-                <small>Feedback and updates help every release grow stronger over time.</small>
-              </div>
+          </div>
+          <div class="principle reveal reveal-delay-2">
+            <div class="principle-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path>
+              </svg>
+            </div>
+            <div>
+              <strong>Built to improve</strong>
+              <small>Feedback and updates help every release grow stronger over time.</small>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ================= APPS & GAMES ================= -->
     <section id="apps">
       <div class="container">
-        <div class="section-kicker">Apps &amp; Games</div>
-        <h2>Mobile ideas, brought to life.</h2>
-        <p class="section-lead">Protus projects are made for Android and distributed through Google Play. Select a category below to explore releases and upcoming projects.</p>
-
-        <div class="apps-categories" aria-label="App categories and projects">
-          
-          <!-- Category 1: Android Apps -->
-          <div class="category-item">
-            <button class="card category-button" type="button" aria-expanded="false" aria-controls="android-apps-panel" id="tab-android-apps" data-panel="android-apps-panel">
-              <div class="category-top-row">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
-                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
-                  </svg>
-                </div>
-                <span class="category-badge">4 Apps Available</span>
-              </div>
-              <div class="category-content">
-                <h3>Android Apps</h3>
-                <p>Browse practical Android apps published by Protus App Development.</p>
-              </div>
-              <div class="category-action">
-                <span class="action-label">View Android apps</span>
-                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </div>
-            </button>
-
-            <div class="app-panel" id="android-apps-panel" role="region" aria-labelledby="tab-android-apps" hidden>
-              <!-- Trial Surfer -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="trial-surfer-feature.png" width="1024" height="500" alt="Trial Surfer feature graphic">
-                </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="trial-surfer-icon.png" width="512" height="512" alt="Trial Surfer icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Android App</span>
-                      <h3>Trial Surfer</h3>
-                    </div>
-                  </div>
-                  <p>Keep track of free trials and stay ahead of upcoming charges. Surf free trials—and bail before the charge.</p>
-                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.trialsurfer.app&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Trial Surfer on Google Play">
-                    <span>View on Google Play</span>
-                    <span aria-hidden="true">&nearr;</span>
-                  </a>
-                </div>
-              </article>
-
-              <!-- Rescue Ring -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="rescue-ring-feature.png" width="1024" height="500" alt="Rescue Ring feature graphic">
-                </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="rescue-ring-icon.png" width="512" height="512" alt="Rescue Ring icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Android App</span>
-                      <h3>Rescue Ring</h3>
-                    </div>
-                  </div>
-                  <p>A discreet alert when you need an exit. Schedule ringtone alerts with no account required and an ad-free option.</p>
-                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.steve.rescuering&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Rescue Ring on Google Play">
-                    <span>View on Google Play</span>
-                    <span aria-hidden="true">&nearr;</span>
-                  </a>
-                </div>
-              </article>
-
-              <!-- ParkLock -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="parklock-feature.png" width="1024" height="500" alt="ParkLock — Find your car. GPS map and parking reminders.">
-                </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="parklock-icon.png" width="1024" height="1024" alt="ParkLock icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Android App</span>
-                      <h3>ParkLock</h3>
-                    </div>
-                  </div>
-                  <p>Find your car with GPS map guidance and parking reminders. Never lose your parking spot again.</p>
-                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.parklock.parking&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View ParkLock on Google Play">
-                    <span>View on Google Play</span>
-                    <span aria-hidden="true">&nearr;</span>
-                  </a>
-                </div>
-              </article>
-
-              <!-- Vendor Vault -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="vendor-vault-feature.png" width="1024" height="500" alt="Vendor Vault — Stock. Sales. Suppliers. Sorted.">
-                </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="vendor-vault-icon.png" width="512" height="512" alt="Vendor Vault icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Android App</span>
-                      <h3>Vendor Vault</h3>
-                    </div>
-                  </div>
-                  <p>Stock. Sales. Suppliers. Sorted. A streamlined inventory, sales, and supplier management tool for vendors.</p>
-                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.consigntrack.inventory&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Vendor Vault on Google Play">
-                    <span>View on Google Play</span>
-                    <span aria-hidden="true">&nearr;</span>
-                  </a>
-                </div>
-              </article>
-            </div>
+        <div class="apps-head reveal">
+          <div>
+            <div class="section-kicker">Apps &amp; Games</div>
+            <h2>Mobile ideas, brought to life.</h2>
+            <p class="section-lead">Made for Android and distributed through Google Play.</p>
           </div>
 
-          <!-- Category 2: Mobile Games -->
-          <div class="category-item">
-            <button class="card category-button" type="button" aria-expanded="false" aria-controls="mobile-games-panel" id="tab-mobile-games" data-panel="mobile-games-panel">
-              <div class="category-top-row">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="6" width="20" height="12" rx="6"></rect>
-                    <line x1="6" y1="12" x2="10" y2="12"></line>
-                    <line x1="8" y1="10" x2="8" y2="14"></line>
-                    <circle cx="15.5" cy="13" r="0.75" fill="currentColor"></circle>
-                    <circle cx="17.5" cy="11" r="0.75" fill="currentColor"></circle>
-                  </svg>
-                </div>
-                <span class="category-badge">2 Games Available</span>
-              </div>
-              <div class="category-content">
-                <h3>Mobile Games</h3>
-                <p>Gameplay-led experiences designed around satisfying mechanics, clarity, and replay value.</p>
-              </div>
-              <div class="category-action">
-                <span class="action-label">View mobile games</span>
-                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </div>
+          <div class="tablist" role="tablist" aria-label="Project categories">
+            <button class="tab" role="tab" id="tab-apps" aria-controls="panel-apps" aria-selected="true" tabindex="0" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              Apps <span class="tab-count">4</span>
             </button>
+            <button class="tab" role="tab" id="tab-games" aria-controls="panel-games" aria-selected="false" tabindex="-1" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="6"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><circle cx="15.5" cy="13" r="0.75" fill="currentColor"></circle><circle cx="17.5" cy="11" r="0.75" fill="currentColor"></circle></svg>
+              Games <span class="tab-count">2</span>
+            </button>
+            <button class="tab" role="tab" id="tab-upcoming" aria-controls="panel-upcoming" aria-selected="false" tabindex="-1" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg>
+              In development <span class="tab-count">2</span>
+            </button>
+          </div>
+        </div>
 
-            <div class="app-panel" id="mobile-games-panel" role="region" aria-labelledby="tab-mobile-games" hidden>
-              <!-- Gym Buddies -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="gym-buddies-feature.jpg" width="1024" height="500" alt="Gym Buddies feature graphic">
+        <!-- Panel: Android Apps (open by default) -->
+        <div class="tab-panel" id="panel-apps" role="tabpanel" aria-labelledby="tab-apps" tabindex="0">
+          <div class="app-grid">
+            <article class="app-card reveal">
+              <div class="app-media"><img src="trial-surfer-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="Trial Surfer feature graphic"></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="trial-surfer-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Android App</span><h3>Trial Surfer</h3></div>
                 </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="gym-buddies-icon.png" width="512" height="512" alt="Gym Buddies icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Mobile Game</span>
-                      <h3>Gym Buddies</h3>
-                    </div>
-                  </div>
-                  <p>Bulk up, stay passable, and get gains in this addictive mobile gym progression game.</p>
-                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.gymbuddies.game&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Gym Buddies on Google Play">
-                    <span>View on Google Play</span>
-                    <span aria-hidden="true">&nearr;</span>
+                <p>Keep track of free trials and stay ahead of upcoming charges. Surf free trials—and bail before the charge.</p>
+                <ul class="app-tags"><li>Free trials</li><li>Charge reminders</li></ul>
+                <div class="app-footer">
+                  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.trialsurfer.app&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get Trial Surfer on Google Play">
+                    <img src="google-play-badge.png" width="563" height="168" alt="Get it on Google Play">
                   </a>
                 </div>
-              </article>
+              </div>
+            </article>
 
-              <!-- Gym Survivors -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="gym-survivors-feature.png" width="1024" height="500" alt="Gym Survivors feature graphic">
+            <article class="app-card reveal reveal-delay-1">
+              <div class="app-media"><img src="rescue-ring-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="Rescue Ring feature graphic"></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="rescue-ring-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Android App</span><h3>Rescue Ring</h3></div>
                 </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="gym-survivors-icon.png" width="512" height="512" alt="Gym Survivors icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Mobile Game</span>
-                      <h3>Gym Survivors</h3>
-                    </div>
-                  </div>
-                  <p>Survive wild workouts, evolve gym gear and build unstoppable gainz.</p>
-                  <a class="button button-primary store-link" href="https://play.google.com/store/apps/details?id=com.gymsurvivors.game&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="View Gym Survivors on Google Play">
-                    <span>View on Google Play</span>
-                    <span aria-hidden="true">&nearr;</span>
+                <p>A discreet alert when you need an exit. Schedule ringtone alerts with no account required and an ad-free option.</p>
+                <ul class="app-tags"><li>No account needed</li><li>Ad-free option</li></ul>
+                <div class="app-footer">
+                  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.steve.rescuering&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get Rescue Ring on Google Play">
+                    <img src="google-play-badge.png" width="563" height="168" alt="Get it on Google Play">
                   </a>
                 </div>
-              </article>
-            </div>
+              </div>
+            </article>
+
+            <article class="app-card reveal">
+              <div class="app-media"><img src="parklock-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="ParkLock — Find your car. GPS map and parking reminders."></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="parklock-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Android App</span><h3>ParkLock</h3></div>
+                </div>
+                <p>Find your car with GPS map guidance and parking reminders. Never lose your parking spot again.</p>
+                <ul class="app-tags"><li>GPS map</li><li>Parking reminders</li></ul>
+                <div class="app-footer">
+                  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.parklock.parking&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get ParkLock on Google Play">
+                    <img src="google-play-badge.png" width="563" height="168" alt="Get it on Google Play">
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="app-card reveal reveal-delay-1">
+              <div class="app-media"><img src="vendor-vault-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="Vendor Vault — Stock. Sales. Suppliers. Sorted."></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="vendor-vault-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Android App</span><h3>Vendor Vault</h3></div>
+                </div>
+                <p>Stock. Sales. Suppliers. Sorted. A streamlined inventory, sales, and supplier management tool for vendors.</p>
+                <ul class="app-tags"><li>Inventory</li><li>Sales</li><li>Suppliers</li></ul>
+                <div class="app-footer">
+                  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.consigntrack.inventory&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get Vendor Vault on Google Play">
+                    <img src="google-play-badge.png" width="563" height="168" alt="Get it on Google Play">
+                  </a>
+                </div>
+              </div>
+            </article>
           </div>
+        </div>
 
-          <!-- Category 3: Upcoming -->
-          <div class="category-item">
-            <button class="card category-button" type="button" aria-expanded="false" aria-controls="upcoming-panel" id="tab-upcoming" data-panel="upcoming-panel">
-              <div class="category-top-row">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-                  </svg>
+        <!-- Panel: Mobile Games -->
+        <div class="tab-panel" id="panel-games" role="tabpanel" aria-labelledby="tab-games" tabindex="0" hidden>
+          <div class="app-grid">
+            <article class="app-card">
+              <div class="app-media"><img src="gym-buddies-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="Gym Buddies feature graphic"></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="gym-buddies-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Mobile Game</span><h3>Gym Buddies</h3></div>
                 </div>
-                <span class="category-badge">2 Projects Preview</span>
+                <p>Bulk up, push your limits, and chase the gains in this addictive mobile gym progression game.</p>
+                <ul class="app-tags"><li>Progression</li><li>Casual</li></ul>
+                <div class="app-footer">
+                  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.gymbuddies.game&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get Gym Buddies on Google Play">
+                    <img src="google-play-badge.png" width="563" height="168" alt="Get it on Google Play">
+                  </a>
+                </div>
               </div>
-              <div class="category-content">
-                <h3>Upcoming</h3>
-                <p>Preview apps and games currently in development at Protus.</p>
-              </div>
-              <div class="category-action">
-                <span class="action-label">View upcoming projects</span>
-                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </div>
-            </button>
+            </article>
 
-            <div class="app-panel" id="upcoming-panel" role="region" aria-labelledby="tab-upcoming" hidden>
-              <!-- TipSplit -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="tipsplit-feature.png" width="1024" height="500" alt="TipSplit — Tip with confidence. Split with ease.">
+            <article class="app-card">
+              <div class="app-media"><img src="gym-survivors-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="Gym Survivors feature graphic"></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="gym-survivors-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Mobile Game</span><h3>Gym Survivors</h3></div>
                 </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="tipsplit-icon.png" width="512" height="512" alt="TipSplit icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Upcoming App</span>
-                      <h3>TipSplit</h3>
-                    </div>
-                  </div>
-                  <p>Tip with confidence. Split with ease. Equal splits, meal subtotals, and custom amounts make splitting the bill effortless.</p>
-                  <div class="coming-soon">Coming soon to Android</div>
+                <p>Survive wild workouts, evolve your gym gear, and build unstoppable gainz.</p>
+                <ul class="app-tags"><li>Survival</li><li>Upgrades</li></ul>
+                <div class="app-footer">
+                  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.gymsurvivors.game&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get Gym Survivors on Google Play">
+                    <img src="google-play-badge.png" width="563" height="168" alt="Get it on Google Play">
+                  </a>
                 </div>
-              </article>
-
-              <!-- FuelSum -->
-              <article class="card-featured">
-                <div class="app-feature-wrap">
-                  <img class="app-feature" src="fuelsum-feature.png" width="1024" height="500" alt="FuelSum — Know the cost. Before you go.">
-                </div>
-                <div class="app-details">
-                  <div class="app-heading">
-                    <img class="app-icon" src="fuelsum-icon.png" width="512" height="512" alt="FuelSum icon">
-                    <div class="app-title-group">
-                      <span class="app-type">Upcoming App</span>
-                      <h3>FuelSum</h3>
-                    </div>
-                  </div>
-                  <p>Know the cost. Before you go. Fuel spending and trip tracking to estimate travel costs and manage journeys with ease.</p>
-                  <div class="coming-soon">Coming soon to Android</div>
-                </div>
-              </article>
-            </div>
+              </div>
+            </article>
           </div>
+        </div>
 
+        <!-- Panel: In development -->
+        <div class="tab-panel" id="panel-upcoming" role="tabpanel" aria-labelledby="tab-upcoming" tabindex="0" hidden>
+          <p class="panel-intro">A preview of what's currently being built at Protus.</p>
+          <div class="app-grid">
+            <article class="app-card">
+              <div class="app-media"><img src="tipsplit-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="TipSplit — Tip with confidence. Split with ease."></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="tipsplit-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Upcoming App</span><h3>TipSplit</h3></div>
+                </div>
+                <p>Tip with confidence. Split with ease. Equal splits, meal subtotals, and custom amounts make splitting the bill effortless.</p>
+                <ul class="app-tags"><li>Equal splits</li><li>Custom amounts</li></ul>
+                <div class="app-footer"><span class="coming-soon">Coming soon to Android</span></div>
+              </div>
+            </article>
+
+            <article class="app-card">
+              <div class="app-media"><img src="fuelsum-feature.webp" width="1024" height="500" loading="lazy" decoding="async" alt="FuelSum — Know the cost. Before you go."></div>
+              <div class="app-body">
+                <div class="app-heading">
+                  <img class="app-icon" src="fuelsum-icon.webp" width="256" height="256" loading="lazy" alt="">
+                  <div><span class="app-type">Upcoming App</span><h3>FuelSum</h3></div>
+                </div>
+                <p>Know the cost. Before you go. Fuel spending and trip tracking to estimate travel costs and manage journeys with ease.</p>
+                <ul class="app-tags"><li>Fuel costs</li><li>Trip tracking</li></ul>
+                <div class="app-footer"><span class="coming-soon">Coming soon to Android</span></div>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ================= CONTACT ================= -->
     <section id="contact">
       <div class="container">
-        <div class="contact">
+        <div class="contact reveal">
           <div>
             <div class="section-kicker">Support &amp; Contact</div>
             <h2>Need help with a Protus app?</h2>
-            <p>For product support, feedback, bug reports, or general enquiries, contact Protus App Development by email.</p>
+            <p>For product support, feedback, bug reports, or general enquiries, get in touch by email. We read every message.</p>
           </div>
-          <a class="button button-primary" href="mailto:protusappdev@gmail.com">Email Support</a>
+          <div class="contact-actions">
+            <a class="button button-primary" href="mailto:protusappdev@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              Email Support
+            </a>
+            <span class="contact-email"><a href="mailto:protusappdev@gmail.com">protusappdev@gmail.com</a></span>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- ================= FOOTER ================= -->
   <footer>
-    <div class="container footer-row">
-      <span>&copy; 2026 Protus App Development. All rights reserved.</span>
-      <a href="#top">Back to top &uarr;</a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="footer-logo" href="#top" aria-label="Protus App Development home">
+            <img src="protus-logo-full.webp" width="720" height="244" alt="Protus App Development" loading="lazy">
+          </a>
+          <p>Independent Android apps and mobile games, available on Google Play.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Apps</h4>
+          <ul>
+            <li><a href="https://play.google.com/store/apps/details?id=com.trialsurfer.app" target="_blank" rel="noopener noreferrer">Trial Surfer</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.steve.rescuering" target="_blank" rel="noopener noreferrer">Rescue Ring</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.parklock.parking" target="_blank" rel="noopener noreferrer">ParkLock</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.consigntrack.inventory" target="_blank" rel="noopener noreferrer">Vendor Vault</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Games</h4>
+          <ul>
+            <li><a href="https://play.google.com/store/apps/details?id=com.gymbuddies.game" target="_blank" rel="noopener noreferrer">Gym Buddies</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.gymsurvivors.game" target="_blank" rel="noopener noreferrer">Gym Survivors</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Support</a></li>
+            <li><a href="mailto:protusappdev@gmail.com">Email us</a></li>
+            <!-- TODO: add your privacy policy link(s), e.g.
+            <li><a href="privacy.html">Privacy policy</a></li> -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Protus App Development. All rights reserved.</span>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    const categoryButtons = document.querySelectorAll('.category-button');
-    const appPanels = document.querySelectorAll('.app-panel');
+    /* ---------- Tabs (WAI-ARIA tabs pattern with arrow-key support) ---------- */
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
 
-    function updateActionLabels() {
-      categoryButtons.forEach((btn) => {
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        const label = btn.querySelector('.action-label');
-        if (label) {
-          const categoryName = btn.querySelector('h3') ? btn.querySelector('h3').textContent.trim() : 'category';
-          label.textContent = isOpen ? `Hide ${categoryName}` : `View ${categoryName}`;
-        }
+    function selectTab(tab, focus = true) {
+      tabs.forEach((t) => {
+        const selected = t === tab;
+        t.setAttribute('aria-selected', String(selected));
+        t.tabIndex = selected ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !selected;
       });
+      if (focus) tab.focus();
+      tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
     }
 
-    categoryButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const targetPanelId = button.dataset.panel;
-        const targetPanel = document.getElementById(targetPanelId);
-        const isCurrentlyOpen = button.getAttribute('aria-expanded') === 'true';
-
-        // Close all panels
-        categoryButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
-        appPanels.forEach((panel) => { panel.hidden = true; });
-
-        // If it wasn't open, open it
-        if (!isCurrentlyOpen && targetPanel) {
-          button.setAttribute('aria-expanded', 'true');
-          targetPanel.hidden = false;
-          
-          // On mobile, scroll so that the button and its new content are in clear view
-          if (window.innerWidth <= 860) {
-            setTimeout(() => {
-              const rect = button.getBoundingClientRect();
-              if (rect.top < 70 || rect.top > window.innerHeight - 200) {
-                button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-              }
-            }, 50);
-          }
-        }
-
-        updateActionLabels();
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectTab(tab, false));
+      tab.addEventListener('keydown', (e) => {
+        let next = null;
+        if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (e.key === 'Home') next = tabs[0];
+        if (e.key === 'End') next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); selectTab(next); }
       });
     });
 
-    // Initialize labels on load
-    updateActionLabels();
+    /* ---------- Hero icons: open the right tab and jump to that app's card ---------- */
+    document.querySelectorAll('.mosaic-tile[data-app]').forEach((tile) => {
+      tile.setAttribute('aria-label', `View ${tile.dataset.app}`);
+      tile.addEventListener('click', (e) => {
+        const tab = document.getElementById(tile.dataset.tab);
+        if (!tab) return;
+        e.preventDefault();
+        selectTab(tab, false);
+        const panel = document.getElementById(tab.getAttribute('aria-controls'));
+        const card = Array.from(panel.querySelectorAll('.app-card'))
+          .find((c) => c.querySelector('h3')?.textContent.trim() === tile.dataset.app);
+        if (!card) return;
+        card.classList.add('is-visible');
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.remove('is-target');
+        void card.offsetWidth; // restart the highlight animation
+        card.classList.add('is-target');
+        // Move keyboard focus to the card's Play badge (or the card itself)
+        const focusTarget = card.querySelector('a') || card;
+        setTimeout(() => focusTarget.focus({ preventScroll: true }), 600);
+      });
+    });
+
+    /* ---------- Header background on scroll ---------- */
+    const header = document.getElementById('site-header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---------- Active nav link follows the visible section ---------- */
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    if ('IntersectionObserver' in window) {
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((a) => {
+            if (a.getAttribute('href') === '#' + entry.target.id) a.setAttribute('aria-current', 'true');
+            else a.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      sections.forEach((s) => navObserver.observe(s));
+
+      // Clear the highlight when back in the hero
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) navLinks.forEach((a) => a.removeAttribute('aria-current'));
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      heroObserver.observe(document.getElementById('top'));
+
+      /* ---------- Scroll reveal ---------- */
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+    }
   </script>
 </body>
 </html>
